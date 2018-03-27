@@ -4,3 +4,13 @@ fr:
       hello: "Test"
     about:
       test: "Youpi"
+    cgv:
+    terms:
+      informations-legales: "Youpi 1"
+      conditions-generales: "Youpi 2"
+        objet: "Youpi 3"
+        donnees-personnelles: "Youpi 4"
+        propriete-intellectuelle: "Youpi 5"
+        responsabilite: "Youpi 6"
+        avertissement: "Youpi 7"
+        competence: "Youpi 8"
