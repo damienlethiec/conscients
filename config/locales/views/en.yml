@@ -4,3 +4,6 @@ en:
       hello: "Test EN"
     about:
       test: "Youpi"
+    terms:
+      informations-legales-title: "Legal"
+      informations-legales: "The site www.conscients.com was developed by 4U ABEL, a simplified joint stock company with a capital of 55 000 euros, registered on the corporate and trade register of Paris with the number 532 174 273 00013. Intra-community VAT number : FR25 532 174 273. Head office : 10 passage Nationale – 75013 Paris – France. Publication manager : Carole Piette. Contact : contact@conscients.com"
