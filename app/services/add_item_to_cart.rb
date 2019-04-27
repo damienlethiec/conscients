@@ -12,7 +12,7 @@ class AddItemToCart
 
   def perform
     find_or_initialize_line_item
-    add_attributes_certicable_line_item if @line_item.tree?
+    add_attributes_certicable_line_item if @line_item.tree_or_personalized?
     update_quantity_line_item
     @line_item
   end
