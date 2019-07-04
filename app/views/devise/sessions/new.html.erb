@@ -18,16 +18,16 @@
         </div>
         <div class="form-group">
         <label for="contact-name" class="label-font"><%= t '.email' %></label>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control mr-sm-2", placeholder: nil %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control mr-sm-2", id: "email-field-js", placeholder: nil %>
         </div>
         <div class="form-group">
         <label for="contact-name" class="label-font"><%= t '.password' %></label>
           <% if @minimum_password_length %>
           <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
           <% end %>
-          <%= f.password_field :password, autocomplete: "off", class: "form-control mr-sm-2", placeholder: nil %>
+          <%= f.password_field :password, autocomplete: "off", class: "form-control mr-sm-2", id: "password-field-js", placeholder: nil %>
         </div>
-        <%= f.submit t('.sign_up'), class: "btn conscients-btn btn-green w-100 mt-3" %>
+        <%= f.submit t('.sign_up'), class: "btn conscients-btn btn-green w-100 mt-3", id: "sign-up-js" %>
       <% end %>
     <button class="fb-connect-btn-w"><%= link_to t('.sign_in_with_provider', provider: OmniAuth::Utils.camelize(:facebook)), omniauth_authorize_path(resource_name, :facebook) %></button>
     </div>
