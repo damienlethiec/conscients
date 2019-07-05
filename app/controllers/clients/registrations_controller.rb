@@ -19,9 +19,8 @@ class Clients::RegistrationsController < DeviseInvitable::RegistrationsControlle
     else
       clean_up_passwords resource
       set_minimum_password_length
-      redirect_to new_client_session_path, notice: resource.errors.full_messages.join(', ')
+      redirect_to new_client_session_path, notice: resource.errors.full_messages.first(2).join(', ')
       # respond_with resource
-      # raise
     end
   end
 
