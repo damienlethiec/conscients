@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ClientsController < ApplicationController
-  before_action :redirect_if_unsigned, only: :show
+  before_action :authenticate_client!
 
   def show
     @markers = current_client.markers
