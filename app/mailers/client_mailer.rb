@@ -15,7 +15,7 @@ class ClientMailer < ApplicationMailer
     @order.line_items.certificated.each do |line_item|
       attachments["certificate##{line_item.id}.pdf"] = line_item.certificate.download
     end
-    mail to: @order.client_email
+    mail to: @order.delivery_address_email
   end
 
   def order_delivery
