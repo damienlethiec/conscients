@@ -63,6 +63,6 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_if_unsigned
-    redirect_to root_path, notice: t('flash.clients.show.notice') and return unless current_client
+    redirect_to(root_path, notice: t('flash.clients.show.notice')) && return unless current_client
   end
 end
