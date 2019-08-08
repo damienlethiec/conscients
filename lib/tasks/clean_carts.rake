@@ -11,7 +11,7 @@ task clean_carts: :environment do
   csv = CSV.generate(headers: true, col_sep: ',') do |csv|
     csv << export_attributes = LineItem.new.attributes.keys
     orders.each do |order|
-      order.line_items.each{ |li| csv << export_attributes.map { |attr| li.send(attr) } }
+      order.line_items.each { |li| csv << export_attributes.map { |attr| li.send(attr) } }
     end
   end
 
