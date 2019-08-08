@@ -19,13 +19,17 @@ class Clients::RegistrationsController < DeviseInvitable::RegistrationsControlle
     else
       clean_up_passwords resource
       set_minimum_password_length
-      redirect_to new_client_session_path, notice: show_notice(resource.errors.full_messages.first(2))
+      # custom start
       # respond_with resource
+      if Client.exists?(email: resource.email)
+        flash[:notice] = t('devise.errors.messages.user_exists')
+      else
+        flash[:notice] = resource.errors.full_messages.to_sentence
+                                 .gsub('rempli(e)', 'rempli')
+      end
+      redirect_to new_client_session_path
+      # custom end
     end
-  end
-
-  def show_notice(messages)
-    messages[1].include?('rempli(e)') ? messages[1].split.first(5).push('rempli').join(' ') : ''
   end
 
   private
