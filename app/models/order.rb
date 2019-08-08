@@ -283,6 +283,10 @@ class Order < ApplicationRecord
     preparing? || fulfilled? || delivered?
   end
 
+  def delivery_address_email
+    delivery_address&.email.presence || client_email
+  end
+
   private
 
   def process_order
