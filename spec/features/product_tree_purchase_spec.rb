@@ -8,11 +8,13 @@ RSpec.feature 'Tree Product Purchase', type: :feature, js: true do
 
   scenario 'A user can buy a tree product' do
     create(:category, slug: 'offrir-un-arbre-cadeau')
-    create(:tree_plantation)
+    tree_plantation = create(:tree_plantation)
     product = create(:product,
                      name_fr: 'Mon arbre',
                      product_type: 'tree',
                      color_certificate: '#32B796')
+    FactoryBot.create(:product_tree_plantation,
+                      product: product, tree_plantation: tree_plantation)
     file_path = Rails.root.join('spec', 'support', 'assets', 'tree.png')
     file = fixture_file_upload(file_path, 'image/png')
     product.images.attach(file)
