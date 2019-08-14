@@ -262,6 +262,10 @@ fr:
           attributes:
             quantity:
               greater_than_or_equal_to: "en stock trop faible"
+        line_item:
+          attributes:
+            quantity:
+              insufficient_stock: 'restante: %{count} arbres'
         tree_plantation:
           attributes:
             trees_quantity:

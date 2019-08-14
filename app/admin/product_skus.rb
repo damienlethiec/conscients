@@ -5,6 +5,11 @@ ActiveAdmin.register ProductSku do
 
   permit_params :product_id, :sku, :variant_id
 
+  scope :all, default: true
+  scope :tree
+  scope :classic
+  scope :personalized
+
   actions :all, except: %i[edit update destroy]
 
   index do

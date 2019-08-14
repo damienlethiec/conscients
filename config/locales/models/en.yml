@@ -86,6 +86,10 @@ en:
           attributes:
             quantity:
               greater_than_or_equal_to: "in stock too limited"
+        line_item:
+          attributes:
+            quantity:
+              insufficient_stock: 'left: %{count} trees'
         tree_plantation:
           attributes:
             trees_quantity:
