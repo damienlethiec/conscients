@@ -21,12 +21,12 @@ class Clients::RegistrationsController < DeviseInvitable::RegistrationsControlle
       set_minimum_password_length
       # custom start
       # respond_with resource
-      if Client.exists?(email: resource.email)
-        flash[:notice] = t('devise.errors.messages.user_exists')
-      else
-        flash[:notice] = resource.errors.full_messages.to_sentence
+      flash[:notice] = if Client.exists?(email: resource.email)
+                         t('devise.errors.messages.user_exists')
+                       else
+                         resource.errors.full_messages.to_sentence
                                  .gsub('rempli(e)', 'rempli')
-      end
+                       end
       redirect_to new_client_session_path
       # custom end
     end

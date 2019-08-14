@@ -41,6 +41,8 @@ class Product < ApplicationRecord
   has_many_attached :images
   has_one_attached :background_image
   has_one_attached :certificate_background
+  has_many :product_tree_plantations, dependent: :destroy
+  has_many :tree_plantations, through: :product_tree_plantations
 
   extend Mobility
   # Change backend to allow query in translatable columns
@@ -80,7 +82,12 @@ class Product < ApplicationRecord
   scope :in_order, -> { order(position: :asc) }
   scope :in_order_home, -> { order(position_home: :asc) }
   scope :images_attached, -> { joins(:images_attachments) }
-  scope :in_stock, -> { joins(:product_skus).where.not(product_skus: { quantity: 0 }) }
+  scope :in_stock, lambda {
+    joins("LEFT JOIN product_skus ON product_skus.product_id = products.id \
+           LEFT JOIN product_tree_plantations ON product_tree_plantations.product_id = products.id \
+           LEFT JOIN tree_plantations ON tree_plantations.id = product_tree_plantations.tree_plantation_id")
+      .where('product_skus.quantity > 0 OR tree_plantations.trees_quantity > 0')
+  }
   scope :with_variant, lambda { |variant|
     includes(:product_skus).where(product_skus: { variant: variant })
   }
@@ -117,5 +124,9 @@ class Product < ApplicationRecord
 
   def lastmod
     updated_at.strftime('%F')
+  end
+
+  def tree_plantations_names
+    tree_plantations.pluck(:project_name).join(' | ')
   end
 end

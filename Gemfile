@@ -105,7 +105,6 @@ group :development do
 
   gem 'brakeman', '~> 4.2', require: false
   gem 'overcommit', '~> 0.44'
-  # gem 'rubocop', '~> 0.71', require: false
   gem 'rubocop-rails', require: false
 
   gem 'guard', '~> 2.14'
@@ -115,5 +114,5 @@ group :development do
 
   gem 'better_errors', '~> 2.4'
   gem 'binding_of_caller', '~> 0.8'
-  gem 'web-console', '~> 3.6'
+  # gem 'web-console', '~> 3.6'
 end
