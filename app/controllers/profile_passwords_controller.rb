@@ -31,6 +31,7 @@ class ProfilePasswordsController < ProfilesController
              else
                current_client.assign_attributes(password: params[:password])
                bypass_sign_in(current_client.reload, scope: :client)
+
                current_client.valid?
                current_client.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
                false

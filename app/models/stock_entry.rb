@@ -21,7 +21,7 @@ class StockEntry < ApplicationRecord
   after_create :update_stock_product_sku, only: :create
 
   def readonly?
-    new_record? ? false : true
+    !new_record?
   end
 
   def update_stock_product_sku

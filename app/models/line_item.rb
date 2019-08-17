@@ -44,6 +44,7 @@ class LineItem < ApplicationRecord
   # validates :recipient_message, presence: true, if: :tree?
   validates :recipient_message, length: { maximum: 110 }
   validates :certificate_date, presence: true, if: :tree?
+  validate :sufficient_plantation_stock, if: :tree?
 
   # Increment and decrement stock quantities
   before_validation :manage_stock_quantites_if_change_sku,
@@ -57,10 +58,9 @@ class LineItem < ApplicationRecord
 
   delegate :classic?, :personalized?, :tree?, :product, :product_images,
            :product_name, :product_ttc_price_cents, :product_ht_price_cents, :product_weight,
-           :certificate_background, :producer_latitude, :producer_longitude,
+           :certificate_background, :producer_latitude, :producer_longitude, :color_certificate,
            to: :product_sku, allow_nil: true
   delegate :client_full_name, :paid?, to: :order
-  delegate :color_certificate, to: :product_sku, allow_nil: true
   delegate :latitude, :longitude, :project_name, :project_type,
            to: :tree_plantation, prefix: true, allow_nil: true
 
@@ -149,6 +149,10 @@ class LineItem < ApplicationRecord
                                 content_type: 'application/pdf')
   end
 
+  def plantation_with_stock
+    product.tree_plantations.where('tree_plantations.trees_quantity >= ?', quantity).first
+  end
+
   private
 
   def url_certificate
@@ -158,13 +162,12 @@ class LineItem < ApplicationRecord
   def manage_stock_quantites_if_change_sku
     return if (product_sku_id_was == product_sku_id) || new_record?
 
-    ProductSku.find(product_sku_id_was).increment(:quantity, quantity_was).save
     product_sku.decrement(:quantity, quantity_was)
   end
 
   def decrement_stock_quantities
     product_sku.decrement(:quantity, added_quantity) unless tree?
-    tree_plantation.decrement(:quantity, added_quantity) if tree?
+    tree_plantation.decrement(:quantity, added_quantity) if tree? && tree_plantation
   end
 
   def increment_stock_quantities_destroy
@@ -176,5 +179,17 @@ class LineItem < ApplicationRecord
 
   def set_cart_to_correct_delivery_type
     order.to_correct_delivery_type
+  end
+
+  def plantation_with_largest_stock
+    product.tree_plantations.where.not(trees_quantity: 0).reorder(trees_quantity: :desc).first
+  end
+
+  def sufficient_plantation_stock
+    unless plantation_with_stock
+      message = I18n.t('insufficient_stock')
+      count = plantation_with_largest_stock.trees_quantity
+      errors.add(:quantity, :insufficient_stock, message: message, count: count)
+    end
   end
 end
