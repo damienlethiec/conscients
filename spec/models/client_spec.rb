@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: clients
@@ -33,6 +32,7 @@
 #  invited_by_id          :bigint(8)
 #  invitations_count      :integer          default(0)
 #  can_debug              :boolean          default(FALSE), not null
+#  session_token          :string           default("1a4bc6334eeb20a7f7636beea93c3ddb")
 #
 
 require 'rails_helper'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_09_082902) do
+ActiveRecord::Schema.define(version: 2019_08_17_205031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 2019_08_09_082902) do
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.boolean "can_debug", default: false, null: false
+    t.string "session_token", default: "1a4bc6334eeb20a7f7636beea93c3ddb"
     t.index ["email"], name: "index_clients_on_email", unique: true
     t.index ["invitation_token"], name: "index_clients_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_clients_on_invitations_count"

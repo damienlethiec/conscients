@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ProfilePasswordsController < ProfilesController
+  before_action :authenticate_client!
+
   def update
     if update_with_password password_params
       redirect_to clients_path, notice: 'mise à jour effectuée'
@@ -23,11 +25,13 @@ class ProfilePasswordsController < ProfilesController
                false
              elsif current_client.valid_password?(current_password)
                result = current_client.update(password: params[:password])
-               bypass_sign_in(current_client)
+               current_client.invalidate_all_sessions!
+               bypass_sign_in(current_client.reload, scope: :client)
                result
              else
                current_client.assign_attributes(password: params[:password])
-               bypass_sign_in(current_client)
+               bypass_sign_in(current_client.reload, scope: :client)
+
                current_client.valid?
                current_client.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
                false
