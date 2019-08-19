@@ -179,7 +179,7 @@ class Order < ApplicationRecord
     return 0 if email?
 
     line_items.inject(0) do |sum, line_item|
-      line_item.tree? ? sum + PRINTING_FEES * line_item.quantity : sum
+      line_item.tree?  ? sum + PRINTING_FEES : sum
     end
   end
 
