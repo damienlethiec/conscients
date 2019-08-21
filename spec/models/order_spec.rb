@@ -35,7 +35,7 @@ require 'rails_helper'
 
 RSpec.describe Order, type: :model do
   context 'generally' do
-    it 'is has a default status of in-cart' do
+    it 'has a default status of in-cart' do
       order = build(:order)
       expect(order.aasm_state).to eq('in_cart')
     end
@@ -46,4 +46,49 @@ RSpec.describe Order, type: :model do
       expect(order.aasm_state).to eq('waiting_for_bank_transfer')
     end
   end
+
+  context '#current_delivery_fees_cents' do
+    it 'returns 13.5 euros in shipping costs to France when a user purchases 10 trees' do
+      # build order
+      order = build(:order,
+        aasm_state: "preparing",
+        delivery_method: "postal")
+
+      # build product
+      product = build(:product,
+        product_type: "tree",
+        weight: 50)
+
+      # build tree_plantation
+      tree_plantation = build(:tree_plantation)
+      # associate tree_plantation and product
+      # product_tree_plantation(tree_plantation: tree_plantation, product: product)
+
+      # buld product_sku
+      product_sku = build(:product_sku,
+        product: product,
+        quantity: 10)
+
+
+      # build variant?
+
+      # build line_item
+      line_item = build(:line_item,
+                                quantity: 10,
+                                product_sku: product_sku,
+                                tree_plantation: tree_plantation)
+      order.line_items << line_item
+      line_item.product == product
+      # line_item.product_sku == product_sku
+      # binding.pry
+      expect(order.current_delivery_fees_cents).to eq(1350)
+    end
+
+    # A user who purchases 1 tree should be charged 4.8 euros in shipping costs to France
+
+    # A user who purchases 1 classic product weighing 500 grams should be charged 5.5 euros in shipping costs to France
+
+    # A user who purchases 10 classic products weighing 500 grams each should be charged 13.5 euros in shipping costs to France
+  end
 end
+
