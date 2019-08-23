@@ -153,6 +153,10 @@ class LineItem < ApplicationRecord
     product.tree_plantations.where('tree_plantations.trees_quantity >= ?', quantity).first
   end
 
+  def shipping_weight
+    tree? ? product_weight : quantity * product_weight
+  end
+
   private
 
   def url_certificate
