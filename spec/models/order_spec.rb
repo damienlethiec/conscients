@@ -48,7 +48,7 @@ RSpec.describe Order, type: :model do
   end
 
   context '#current_delivery_fees_cents' do
-    it 'returns 4.8 euros in shipping costs to France when a user purchases 1 tree product with a quantity of 1 - 1 certificate' do
+    it 'returns  4.80 euros in shipping costs to France when a user purchases 1 tree product with a quantity of 1 - 1 certificate' do
 
       client = Client.create!(email: 'test@gmail.com', password: '12345678')
       order = Order.create!(client: client)
@@ -123,7 +123,7 @@ RSpec.describe Order, type: :model do
       expect(order.current_delivery_fees_cents).to eq(480)
     end
 
-    it 'returns 4.8 euros in shipping costs to France when a user purchases 1 tree product with a quantity of 10 - 1 certificate' do
+    it 'returns  4.80 euros in shipping costs to France when a user purchases 1 tree product with a quantity of 10 - 1 certificate' do
 
       client = Client.create!(email: 'test@gmail.com', password: '12345678')
       order = Order.create!(client: client)
@@ -198,7 +198,7 @@ RSpec.describe Order, type: :model do
       expect(order.current_delivery_fees_cents).to eq(480)
     end
 
-    it 'returns 8 euros in shipping costs to France when a user purchases 5 separate tree products of unknown quantities - 5 certificates' do
+    it 'returns  8.00 euros in shipping costs to France when a user purchases 5 separate tree products of unknown quantities - 5 certificates' do
 
       client = Client.create!(email: 'test@gmail.com', password: '12345678')
       order = Order.create!(client: client)
@@ -277,7 +277,7 @@ RSpec.describe Order, type: :model do
       expect(order.current_delivery_fees_cents).to eq(800)
     end
 
-    it 'returns 13.5 euros in shipping costs to France when a user purchases 10 separate tree products of unknown quantities - 10 certificates' do
+    it 'returns 13.50 euros in shipping costs to France when a user purchases 10 separate tree products of unknown quantities - 10 certificates' do
 
       client = Client.create!(email: 'test@gmail.com', password: '12345678')
       order = Order.create!(client: client)
@@ -356,7 +356,7 @@ RSpec.describe Order, type: :model do
       expect(order.current_delivery_fees_cents).to eq(1350)
     end
 
-    it 'returns 9 euros in shipping costs to France when a user purchases 3 classic product with a total weight of 1500 grams' do
+    it 'returns  9.00 euros in shipping costs to France when a user purchases 3 classic product with a total weight of 1500 grams' do
 
       client = Client.create!(email: 'test@gmail.com', password: '12345678')
       order = Order.create!(client: client)
@@ -414,7 +414,7 @@ RSpec.describe Order, type: :model do
       expect(order.current_delivery_fees_cents).to eq(900)
     end
 
-    it 'returns 9.8 euros in shipping costs to France when a user purchases 3 classic product with a total weight of 1500 grams, and 1 tree product with an unknown quantity - 1 certificate' do
+    it 'returns  9.80 euros in shipping costs to France when a user purchases 3 classic product with a total weight of 1500 grams, and 1 tree product with an unknown quantity - 1 certificate' do
 
       client = Client.create!(email: 'test@gmail.com', password: '12345678')
       order = Order.create!(client: client)
