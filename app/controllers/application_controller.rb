@@ -3,8 +3,11 @@ require 'application_responder'
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  impersonates :client
+
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found?
   rescue_from ActionController::UnknownFormat, with: :record_not_found? if Rails.env.production?
+  rescue_from ActionController::InvalidAuthenticityToken, with: :redirect_to_referer_or_path
 
   self.responder = ApplicationResponder
   respond_to :html
@@ -17,6 +20,11 @@ class ApplicationController < ActionController::Base
   after_action :track_action
 
   private
+
+  def redirect_to_referer_or_path
+    flash[:notice] = t('flash.invalid_authenticity_token')
+    redirect_to request.referer || root_path
+  end
 
   def set_locale
     I18n.locale = params.fetch(:locale, I18n.default_locale).to_sym
@@ -63,6 +71,6 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_if_unsigned
-    redirect_to root_path, notice: t('flash.clients.show.notice') and return unless current_client
+    redirect_to(root_path, notice: t('flash.clients.show.notice')) && return unless current_client
   end
 end

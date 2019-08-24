@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: clients
@@ -32,6 +31,8 @@
 #  invited_by_type        :string
 #  invited_by_id          :bigint(8)
 #  invitations_count      :integer          default(0)
+#  can_debug              :boolean          default(FALSE), not null
+#  session_token          :string           default("1a4bc6334eeb20a7f7636beea93c3ddb")
 #
 
 class Client < ApplicationRecord
@@ -79,14 +80,10 @@ class Client < ApplicationRecord
   # Build markers for producers and tree plantations for the client admin
   # rubocop:disable Metrics/AbcSize
   def markers
-    markers = []
     line_items.paid.includes(:product_sku).map do |line_item|
-      markers << line_item.producer_marker if line_item.producer_marker?
-    end
-    tree_plantations.includes(:line_items).map do |tree_plantation|
-      markers << tree_plantation.marker(self) if tree_plantation.line_items.paid.any?
-    end
-    markers.uniq
+      line_item.producer_marker if line_item.producer_marker?
+      line_item.tree_plantation_marker if line_item.tree_marker?
+    end.uniq
   end
   # rubocop:enable Metrics/AbcSize
 
@@ -120,5 +117,13 @@ class Client < ApplicationRecord
     elsif addresses.any?
       addresses.last.full_name
     end
+  end
+
+  def authenticatable_salt
+    "#{super}#{session_token}"
+  end
+
+  def invalidate_all_sessions!
+    self.session_token = SecureRandom.hex
   end
 end

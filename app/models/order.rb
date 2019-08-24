@@ -179,13 +179,13 @@ class Order < ApplicationRecord
     return 0 if email?
 
     line_items.inject(0) do |sum, line_item|
-      line_item.tree? ? sum + PRINTING_FEES * line_item.quantity : sum
+      line_item.tree?  ? sum + PRINTING_FEES : sum
     end
   end
 
   def total_weight
     if line_items.includes(:product_sku).map(&:product_sku).compact.present?
-      line_items.includes(:product_sku).sum(&:product_weight) || 0
+      line_items.includes(:product_sku).map(&:shipping_weight).sum || 0
     else
       0
     end
@@ -277,6 +277,14 @@ class Order < ApplicationRecord
 
   def client_email_or_delivery_address
     email? ? client.email : "#{delivery_address.full_name}\n#{delivery_address}"
+  end
+
+  def paid?
+    preparing? || fulfilled? || delivered?
+  end
+
+  def delivery_address_email
+    delivery_address&.email.presence || client_email
   end
 
   private

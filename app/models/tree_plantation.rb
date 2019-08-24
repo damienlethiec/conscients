@@ -26,11 +26,14 @@ class TreePlantation < ApplicationRecord
   has_many :line_items, dependent: :destroy
   has_many :orders, through: :line_items
   has_one_attached :klm_file
+  has_many :product_tree_plantations, dependent: :destroy
+  has_many :product, through: :product_tree_plantations
 
   # Initialize quantity (base tree quantity is the initial quantity in the plantation)
   before_create :match_base_tree_quantity
   # Check if Tree Plantation infos finalized and send emails if necessary
   before_save :update_is_full_and_send_emails, unless: :is_full?
+  before_update :alert_on_zero_quantity
 
   extend Mobility
   translates :project_type
@@ -41,22 +44,16 @@ class TreePlantation < ApplicationRecord
   validates :base_certificate_uuid, length: { maximum: 15 }
   validates :project_name, :project_type, :plantation_uuid, :tree_specie, :producer_name,
             :partner, length: { maximum: 40 }, allow_nil: true
-  validates :trees_quantity, numericality: { greater_than_or_equal_to: 0 }
+  # replaced by LineItem#sufficient_plantation_stock
+  # validates :trees_quantity, numericality: { greater_than_or_equal_to: 0 }
 
   default_scope { in_order }
   scope :in_order, -> { order(trees_quantity: :asc) }
 
   alias_attribute :quantity, :trees_quantity
 
-  # Picks the correct tree plantation to link the line item to
-  class << self
-    def first_with_needed_quantity(quantity)
-      all.sort.select { |tp| tp.trees_quantity >= quantity }.first || last
-    end
-  end
-
-  def marker(client)
-    line_items.paid.where(orders: { client: client }).tree_plantation_marker
+  def self.admin_select
+    all.map { |tp| ["#{tp.project_name} (id: #{tp.id}, qtty: #{tp.trees_quantity})", tp.id] }
   end
 
   def to_s
@@ -86,6 +83,17 @@ class TreePlantation < ApplicationRecord
   def match_base_tree_quantity
     self.base_tree_quantity = trees_quantity
   end
+
+  # rubocop:disable Metrics/AbcSize
+  def alert_on_zero_quantity
+    return unless quantity != quantity_was && quantity_was.positive? && quantity.zero?
+
+    ContactMailer.with(
+      subject: "Stock alert TreePlantation: #{project_name} - product_ids: #{product_ids.join('|')}",
+      message: "The quantity reached 0. This could impact products with the ids:  #{product_ids.join('|')}"
+    ).stock_alert.deliver_later
+  end
+  # rubocop:enable Metrics/AbcSize
 
   private
 

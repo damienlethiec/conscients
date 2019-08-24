@@ -334,7 +334,7 @@ en:
         sub_total: "Subtotal"
         without_delivery_fees: "(excluding delivery fees, calculated in the next screen)"
         delivery_is_billing: "Use the same address for billing and delivery"
-        go_to_payment: "Go to paiement"
+        go_to_payment: Go to payment
         general_sales_conditions: "I have read the general sales conditions and accept them"
         delivery_address: "Delivery address"
         billing_address: "Billing address"
@@ -460,7 +460,7 @@ en:
         title: "Client account"
         sign_up: "Create your account"
         already_sign_up: "Already registered?"
-        sign_in: "Connect"
+        sign_in: "Login"
         subscribe_to_newsletter: "Subscribe to newsletter"
         password: "Choose a password"
         email: "Your email"
@@ -472,7 +472,7 @@ en:
       b2b: "B2B"
       my_cart: "My cart"
       search: "Search"
-      sign_in: "Connect"
+      sign_in: "Login"
       blog: "News"
       sign_out: "Sign out"
       forgot_your_password: "Forgot your password?"
@@ -519,3 +519,4 @@ en:
       show:
         notice: You must log in to access this page
     record_not_found: Resource not found
+    invalid_authenticity_token: Please try again

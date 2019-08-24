@@ -69,6 +69,10 @@ gem 'sass-rails', '~> 5.0'
 
 gem 'invisible_captcha'
 
+# debugging
+gem 'pgsync' # Sync Postgres data between databases (ex: from Production To Development)
+gem 'pretender' # login as any user
+
 group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
@@ -101,7 +105,6 @@ group :development do
 
   gem 'brakeman', '~> 4.2', require: false
   gem 'overcommit', '~> 0.44'
-  # gem 'rubocop', '~> 0.71', require: false
   gem 'rubocop-rails', require: false
 
   gem 'guard', '~> 2.14'
@@ -111,5 +114,5 @@ group :development do
 
   gem 'better_errors', '~> 2.4'
   gem 'binding_of_caller', '~> 0.8'
-  gem 'web-console', '~> 3.6'
+  # gem 'web-console', '~> 3.6'
 end

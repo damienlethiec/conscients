@@ -24,8 +24,10 @@ class AddItemToCart
   end
 
   def add_attributes_certicable_line_item
-    set_tree_plantation
-    add_plantation_attributes_to_line_item
+    if plantation_with_stock
+      set_tree_plantation
+      add_plantation_attributes_to_line_item
+    end
   end
 
   # Quantity is 0 by default but could be more if line item already in cart (and just updated)
@@ -34,7 +36,11 @@ class AddItemToCart
   end
 
   def set_tree_plantation
-    @tree_plantation = TreePlantation.first_with_needed_quantity(@quantity)
+    @tree_plantation = plantation_with_stock
+  end
+
+  def plantation_with_stock
+    @line_item.plantation_with_stock
   end
 
   def add_plantation_attributes_to_line_item

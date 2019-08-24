@@ -1,0 +1,5 @@
+fr:
+  devise:
+    errors:
+      messages:
+        user_exists: Désolés cet email est déjà utilisé. Merci d’en saisir un nouveau ou d’utiliser le formulaire « Me connecter »
