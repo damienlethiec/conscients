@@ -6,7 +6,7 @@ function launchFlatpickr(id, displayedDate) {
   flatpickr(id, {
     dateFormat: "d-m-Y",
     locale,
-    allowInput: true,
+    // allowInput: true,
     defaultDate: displayedDate,
     minDate: new Date(new Date().getFullYear(), 0, 1)
   });
