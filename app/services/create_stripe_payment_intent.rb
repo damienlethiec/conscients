@@ -3,11 +3,11 @@
 class CreateStripePaymentIntent
   def initialize(cart)
     @cart = cart
-    Stripe.api_key = stripe_secret_key
   end
 
   def perform
     @cart.update payment_intent_id: payment_intent['id']
+    payment_intent
   end
 
   private
@@ -25,17 +25,13 @@ class CreateStripePaymentIntent
   end
 
   def payment_intent
-    Stripe::PaymentIntent.create(
+    @payment_intent ||= Stripe::PaymentIntent.create(
       amount: amount,
       currency: currency,
       payment_method_types: ['card'],
       description: "PaymentIntent for order ##{@cart.id}",
       customer: customer
     )
-  end
-
-  def stripe_secret_key
-    Rails.application.credentials.dig(Rails.env.to_sym, :stripe_secret_key)
   end
 
   def amount

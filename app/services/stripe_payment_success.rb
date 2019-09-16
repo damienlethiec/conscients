@@ -1,28 +1,30 @@
 # frozen_string_literal: true
 
 class StripePaymentSuccess
-  def self.persist(cart)
-    new(cart).persist
+  def self.call(cart, event_params)
+    new(cart, event_params).call
   end
 
-  def initialize(cart)
+  def initialize(cart, event_params)
     @cart = cart
-    Stripe.api_key = stripe_secret_key
+    @event_params = event_params
   end
 
-  def persist
+  def call
+    return unless paid?
+
     @cart.stripe!
-    @cart.update(payment_details: intent.charges.first.to_json)
+    @cart.update(payment_details: charge)
     @cart.pay!
   end
 
   private
 
-  def stripe_secret_key
-    Rails.application.credentials.dig(Rails.env.to_sym, :stripe_secret_key)
+  def paid?
+    @event_params['status'] == 'succeeded'
   end
 
-  def intent
-    Payment::Intent.fetch(@cart)
+  def charge
+    @event_params['charges']['data'].first.to_json
   end
 end

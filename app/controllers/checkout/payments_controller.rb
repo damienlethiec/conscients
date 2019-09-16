@@ -5,18 +5,13 @@ class Checkout::PaymentsController < ApplicationController
                                                         create_bank_transfer paypal_success]
 
   def new
-    redirect_to(redirect_to(cart_path(@cart))) && return if @cart.ht_price_cents.zero?
+    redirect_to(cart_path(@cart)) && return if @cart.ht_price_cents.zero?
 
-    @intent = intent
+    @intent = Payment::Intent.fetch(@cart)
   end
 
   def stripe_success
-    if paid?
-      StripePaymentSuccess.persist(@cart)
-      redirect_to payment_path(@cart)
-    else
-      redirect_to new_payment_path, alert: t('flash.payments.create.alert')
-    end
+    redirect_to payment_path(@cart)
   end
 
   def create_paypal
@@ -44,15 +39,5 @@ class Checkout::PaymentsController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-  end
-
-  private
-
-  def paid?
-    intent.status == 'succeeded'
-  end
-
-  def intent
-    Payment::Intent.fetch(@cart)
   end
 end

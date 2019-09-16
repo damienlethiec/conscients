@@ -40,5 +40,8 @@ module Conscients
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # for ngrok testing:
+    # config.web_console.whitelisted_ips = '54.187.205.235'
   end
 end
