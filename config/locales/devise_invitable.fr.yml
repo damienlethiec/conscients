@@ -27,9 +27,9 @@ fr:
       invitation_instructions:
         subject: "Instructions d'invitation"
         dear: "Cher/Chère %{first_name}"
-        body1: "Je suis très très heureuse de vous annoncer la naissance du nouveau site de Conscients ! Et j’attends impatiemment de savoir s’il vous plaît !"
-        body2: "L’édition des certificats est désormais automatique, ce qui vous permettra de planter à toute heure et de recevoir quasi instantanément votre certificat personnalisé :)"
-        body3: "Nous n’avons pas pu garder vos comptes avec vos infos, car la dernière version du site faisait la tête. Alors, nous vous invitons à cliquer sur le lien dans cet email pour recréer votre compte en quelques clics !"
+        body1: "Conscients a un nouveau site depuis quelques mois ! Nous travaillions dessus depuis un loong moment et j’espère qu’il vous plaira ! Peut-être l’avez-vous déjà visité ?"
+        body2: "Je n’ai pas pu garder vos comptes clients avec les informations vous concernant (mais pour les arbres que vous avez planté pas d’inquiétude, j’ai tout dans les registres de plantation !)… Du coup, je vous invite à cliquer sur le lien dans cet email pour récréer votre compte en quelques clics ! J’espère que vous ne m’en voudrez pas trop !"
+        body3: "Un changement de taille et une bonne nouvelle, l’édition des certificats de plantation est désormais automatique, ce qui vous permettra de planter à toute heure et de recevoir quasi instantanément votre certificat personnalisé :) On ne sait jamais, si vous réalisez à minuit que vous avez oublié de faire un cadeau pour le lendemain matin, cela pourrait épargner votre sommeil (et même vous aidez à mieux dormir en sachant que vous contribuez à préserver notre environnement :)"
         body4: "Et automatique ne signifie pas que les humains ont disparus ! Je serai toujours à votre disposition pour vous répondre :)"
         accept: "Accepter l'invitation"
         signature1: "Merci beaucoup !"
