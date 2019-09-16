@@ -23,6 +23,7 @@ class LineItemsController < ApplicationController
   def destroy
     @line_item.destroy
     if @cart.ht_price_cents.zero?
+      cancel_stripe_payment_intent
       redirect_to cart_path(@cart)
     else
       redirect_back fallback_location: cart_path(@cart)

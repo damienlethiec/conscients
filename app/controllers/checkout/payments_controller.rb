@@ -1,14 +1,22 @@
 # frozen_string_literal: true
 
 class Checkout::PaymentsController < ApplicationController
-  def new; end
+  before_action :cancel_stripe_payment_intent, only: %i[create_paypal
+                                                        create_bank_transfer paypal_success]
 
-  def create_stripe
-    CreateStripePayment.new(@cart, params[:stripe_token]).perform
-    redirect_to payment_path(@cart)
-    # redirect_to payment_path(@cart), notice: t('flash.payments.create.notice')
-  rescue Stripe::CardError, StandardError
-    redirect_to new_payment_path, alert: t('flash.payments.create.alert')
+  def new
+    redirect_to(redirect_to(cart_path(@cart))) && return if @cart.ht_price_cents.zero?
+
+    @intent = intent
+  end
+
+  def stripe_success
+    if paid?
+      StripePaymentSuccess.persist(@cart)
+      redirect_to payment_path(@cart)
+    else
+      redirect_to new_payment_path, alert: t('flash.payments.create.alert')
+    end
   end
 
   def create_paypal
@@ -36,5 +44,15 @@ class Checkout::PaymentsController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+  end
+
+  private
+
+  def paid?
+    intent.status == 'succeeded'
+  end
+
+  def intent
+    Payment::Intent.fetch(@cart)
   end
 end

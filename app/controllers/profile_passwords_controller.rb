@@ -20,17 +20,17 @@ class ProfilePasswordsController < ProfilesController
     end
 
     result = if params[:password].blank?
-      false
-    elsif current_client.valid_password?(current_password)
-      result = current_client.update(password: params[:password])
-      bypass_sign_in(current_client)
-      result
-    else
-      current_client.assign_attributes(password: params[:password])
-      bypass_sign_in(current_client)
-      current_client.valid?
-      current_client.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
-      false
+               false
+             elsif current_client.valid_password?(current_password)
+               result = current_client.update(password: params[:password])
+               bypass_sign_in(current_client)
+               result
+             else
+               current_client.assign_attributes(password: params[:password])
+               bypass_sign_in(current_client)
+               current_client.valid?
+               current_client.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+               false
     end
 
     params.delete(:password)

@@ -69,7 +69,7 @@ Rails.application.routes.draw do
       resources :deliveries, only: %i[new create]
       resources :payments, only: %i[new show] do
         collection do
-          post 'create_stripe'
+          post 'stripe_success'
           post 'create_paypal'
           post 'create_bank_transfer'
           get 'paypal_success'

@@ -105,7 +105,6 @@ group :development do
 
   gem 'brakeman', '~> 4.2', require: false
   gem 'overcommit', '~> 0.44'
-  # gem 'rubocop', '~> 0.71', require: false
   gem 'rubocop-rails', require: false
 
   gem 'guard', '~> 2.14'
