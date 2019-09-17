@@ -150,7 +150,8 @@ class LineItem < ApplicationRecord
   end
 
   def plantation_with_stock
-    product.tree_plantations.where('tree_plantations.trees_quantity >= ?', quantity).first
+    product.tree_plantations.where('tree_plantations.trees_quantity >= ?', quantity)
+           .reorder(trees_quantity: :desc).first
   end
 
   def shipping_weight
@@ -186,13 +187,14 @@ class LineItem < ApplicationRecord
   end
 
   def plantation_with_largest_stock
-    product.tree_plantations.where.not(trees_quantity: 0).reorder(trees_quantity: :desc).first
+    product.tree_plantations.where('tree_plantations.trees_quantity >= 0')
+           &.reorder(trees_quantity: :desc)&.first
   end
 
   def sufficient_plantation_stock
     unless plantation_with_stock
       message = I18n.t('insufficient_stock')
-      count = plantation_with_largest_stock.trees_quantity
+      count = plantation_with_largest_stock&.trees_quantity || 0
       errors.add(:quantity, :insufficient_stock, message: message, count: count)
     end
   end
