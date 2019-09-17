@@ -462,13 +462,11 @@ Rails.application.routes.draw do
     )
     resources :sitemap_tests, only: :index
 
-    if Rails.env.production?
-      get '*path', to: 'pages#home', constraints: lambda { |req|
-        req.path.exclude? 'rails/active_storage'
-      }
-      post '*path', to: 'pages#home', constraints: lambda { |req|
-        req.path.exclude? 'rails/active_storage'
-      }
-    end
+    get '*path', to: 'pages#home', constraints: lambda { |req|
+      req.path.exclude? 'rails/active_storage'
+    }
+    post '*path', to: 'pages#home', constraints: lambda { |req|
+      req.path.exclude? 'rails/active_storage'
+    }
   end
 end
