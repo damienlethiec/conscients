@@ -15,7 +15,7 @@ class NewsletterSubscriptionsController < ApplicationController
 
   private
 
-  def add_to_list
+  def add_to_list(list_id)
     Gibbon::Request.lists(list_id)
                    .members(Digest::MD5.hexdigest(params['email'].downcase))
                    .upsert(body:
