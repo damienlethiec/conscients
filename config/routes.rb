@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     post :stop_impersonating, on: :collection
   end
 
+  post '/payment_intent_succeeded', to: 'webhooks/stripe/events#payment_intent_succeeded', as: 'payment_intent_succeeded'
+
   scope '(:locale)', locale: /en/ do
     root to: 'pages#home'
     devise_for :clients, skip: :omniauth_callbacks,
@@ -69,7 +71,7 @@ Rails.application.routes.draw do
       resources :deliveries, only: %i[new create]
       resources :payments, only: %i[new show] do
         collection do
-          post 'create_stripe'
+          post 'stripe_success'
           post 'create_paypal'
           post 'create_bank_transfer'
           get 'paypal_success'

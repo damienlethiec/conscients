@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_07_130542) do
+ActiveRecord::Schema.define(version: 2019_09_14_194237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_130542) do
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.boolean "can_debug", default: false, null: false
+    t.string "session_token", default: "1a4bc6334eeb20a7f7636beea93c3ddb"
     t.index ["email"], name: "index_clients_on_email", unique: true
     t.index ["invitation_token"], name: "index_clients_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_clients_on_invitations_count"
@@ -291,6 +292,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_130542) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "payment_details"
+    t.string "payment_intent_id"
     t.index ["aasm_state"], name: "index_orders_on_aasm_state"
     t.index ["billing_address_id"], name: "index_orders_on_billing_address_id"
     t.index ["client_id"], name: "index_orders_on_client_id"
@@ -309,6 +311,15 @@ ActiveRecord::Schema.define(version: 2019_08_07_130542) do
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_product_skus_on_product_id"
     t.index ["variant_id"], name: "index_product_skus_on_variant_id"
+  end
+
+  create_table "product_tree_plantations", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "tree_plantation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_tree_plantations_on_product_id"
+    t.index ["tree_plantation_id"], name: "index_product_tree_plantations_on_tree_plantation_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -391,5 +402,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_130542) do
   add_foreign_key "orders", "coupons"
   add_foreign_key "product_skus", "products"
   add_foreign_key "product_skus", "variants"
+  add_foreign_key "product_tree_plantations", "products"
+  add_foreign_key "product_tree_plantations", "tree_plantations"
   add_foreign_key "stock_entries", "product_skus"
 end

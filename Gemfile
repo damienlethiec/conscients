@@ -55,7 +55,7 @@ gem 'responders', '~> 2.4'
 gem 'aasm', '~> 4.12'
 gem 'money-rails', '~> 1.11'
 gem 'paypal-sdk-rest', '~> 1.7'
-gem 'stripe', '~> 3.13'
+gem 'stripe', '~> 5.1.1'
 
 gem 'kaminari', '~> 1.1'
 gem 'pg_search', '~> 2.1'
@@ -105,7 +105,6 @@ group :development do
 
   gem 'brakeman', '~> 4.2', require: false
   gem 'overcommit', '~> 0.44'
-  # gem 'rubocop', '~> 0.71', require: false
   gem 'rubocop-rails', require: false
 
   gem 'guard', '~> 2.14'

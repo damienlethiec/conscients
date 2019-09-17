@@ -71,6 +71,15 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_if_unsigned
-    redirect_to root_path, notice: t('flash.clients.show.notice') and return unless current_client
+    redirect_to(root_path, notice: t('flash.clients.show.notice')) && return unless current_client
+  end
+
+  def cancel_stripe_payment_intent
+    return unless @cart.payment_intent_id
+
+    id = @cart.payment_intent_id
+    @cart.update payment_intent_id: nil
+    Stripe::PaymentIntent.cancel id
+  rescue Stripe::InvalidRequestError
   end
 end
