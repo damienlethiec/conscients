@@ -16,11 +16,11 @@ class CreateStripePaymentIntent
     if @cart.client_stripe_customer_id
       Stripe::Customer.retrieve(@cart.client_stripe_customer_id)
     else
-      Stripe::Customer.create(
+      stripe_customer = Stripe::Customer.create(
         description: "Customer for #{@cart.client_email}",
         email:  @cart.client_email
       )
-      @cart.client.update(stripe_customer_id: customer.id)
+      @cart.client.update(stripe_customer_id: stripe_customer.id)
     end
   end
 
