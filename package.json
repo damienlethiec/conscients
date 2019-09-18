@@ -30,6 +30,5 @@
     "stylelint": "^9.1.1",
     "stylelint-config-standard": "^18.2.0",
     "webpack-dev-server": "^2.11.2"
-  },
-  "version": "0.0.0"
+  }
 }
