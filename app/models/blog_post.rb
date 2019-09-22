@@ -38,7 +38,7 @@ class BlogPost < ApplicationRecord
   validates :content_en, :seo_title_en, :meta_description_en, :slug_en, :category_en, :title_en,
             presence: true, if: :published_en?
 
-  default_scope { i18n.friendly.latest_first.includes(:image_for_home_attachment) }
+  default_scope { i18n.friendly.includes(:image_for_home_attachment) }
   scope :latest_first, -> { order(created_at: :desc) }
   scope :in_order, -> { order(position: :asc) }
   # Can be published in one language but not the other
