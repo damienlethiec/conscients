@@ -12,6 +12,7 @@
   <td><%= blog_post.title %></th>
   <td><%= t("namespace.#{blog_post.published_fr.to_s}") %></td>
   <td><%= t("namespace.#{blog_post.published_en.to_s}") %></td>
+  <td><%= blog_post.position %></td>
   <td>
     <%= link_to t('.show'), admin_blog_post_path(blog_post), class: "btn btn-orange my-1" %>
     <%= link_to t('.edit'), edit_admin_blog_post_path(blog_post), class: "btn btn-orange my-1" %>
