@@ -461,8 +461,16 @@ Rails.application.routes.draw do
       '/', status: 301
     )
     resources :sitemap_tests, only: :index
-    match '*path', to: 'pages#home', constraints: lambda { |req|
-      req.path.exclude? 'rails/active_storage'
-    }, via: %i[post put patch delete]
+    if Rails.env.production?
+      get '*path', to: 'pages#home', constraints: lambda { |req|
+        req.path.exclude? 'rails/active_storage'
+      }
+      post '*path', to: 'pages#home', constraints: lambda { |req|
+        req.path.exclude? 'rails/active_storage'
+      }
+      match '*path', to: 'pages#home', constraints: lambda { |req|
+        req.path.exclude? 'rails/active_storage'
+      }, via: %i[post put patch delete]
+    end
   end
 end
