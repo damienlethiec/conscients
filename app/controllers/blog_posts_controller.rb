@@ -2,7 +2,7 @@
 
 class BlogPostsController < ApplicationController
   def index
-    @blog_posts = BlogPost.send("published_#{I18n.locale}").page(params[:page])
+    @blog_posts = BlogPost.send("published_#{I18n.locale}").latest_first.page(params[:page])
   end
 
   def show
