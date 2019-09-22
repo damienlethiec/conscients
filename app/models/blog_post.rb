@@ -40,7 +40,7 @@ class BlogPost < ApplicationRecord
             presence: true, if: :published_en?
 
   default_scope { i18n.friendly.in_order.includes(:image_for_home_attachment) }
-  scope :in_order, -> { order(position: :asc) }
+  scope :in_order, -> { order(position: :desc) }
   # Can be published in one language but not the other
   scope :published_en, -> { where(published_en: true) }
   scope :published_fr, -> { where(published_fr: true) }
