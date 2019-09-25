@@ -84,6 +84,9 @@ Rails.application.routes.draw do
     resource :profile_password, only: %i[update]
 
     # permanent redirections
+    get '/my-tree-shirt', to: redirect(
+      '/blog_posts', status: 301
+    )
     get '/conscients-chez-lilli-bulle', to: redirect(
       '/', status: 301
     )
