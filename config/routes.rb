@@ -84,9 +84,9 @@ Rails.application.routes.draw do
     resource :profile_password, only: %i[update]
 
     # permanent redirections
-    # get '/my-tree-shirt', to: redirect(
-    #   '/blog_posts', status: 301
-    # )
+    get '/my-tree-shirt', to: redirect(
+      '/blog_posts', status: 301
+    )
     get '/conscients-chez-lilli-bulle', to: redirect(
       '/', status: 301
     )
@@ -464,6 +464,11 @@ Rails.application.routes.draw do
       '/', status: 301
     )
     resources :sitemap_tests, only: :index
+
+    %w[about b2b contact faq participate payment_shipping site_map terms].each do |static_page|
+      get "/#{static_page}", to: "pages##{static_page}"
+    end
+
     if Rails.env.production?
       get '*path', to: 'pages#home', constraints: lambda { |req|
         req.path.exclude? 'rails/active_storage'
