@@ -22,6 +22,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  payment_details        :jsonb
+#  payment_intent_id      :string
 #
 # Foreign Keys
 #

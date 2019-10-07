@@ -392,6 +392,9 @@ en:
         bank_transfer: "Bank Transfer"
       stripe_button:
         card: "Card"
+      stripe_form:
+        submit: Submit payment
+        choose_other_payment_method: Chose other payment method
       price:
         sub_total: "Sub Total"
         total_price: "Total price"

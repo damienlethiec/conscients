@@ -385,6 +385,9 @@ fr:
         bank_transfer: "Virement"
       stripe_button:
         card: "CB"
+      stripe_form:
+        submit: Envoyer le paiement
+        choose_other_payment_method: Choisir un autre mode de paiement
       line_items_table:
         selection: "Sélection"
         quantity: "Quantité"
