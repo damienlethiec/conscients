@@ -149,16 +149,22 @@ class LineItem < ApplicationRecord
                                 content_type: 'application/pdf')
   end
 
-  def plantation_with_stock
-    product.tree_plantations.where('tree_plantations.trees_quantity >= ?', quantity)
-           .reorder(trees_quantity: :desc).first
-  end
-
   def shipping_weight
     tree? ? product_weight : quantity * product_weight
   end
 
+  def plantation_with_stock(qtty_diff = nil)
+    qtty = qtty_diff.presence || quantity
+    product.tree_plantations.where('tree_plantations.trees_quantity >= ?', qtty)
+           &.reorder(trees_quantity: :desc)&.first
+  end
+
   private
+
+  def plantation_with_largest_stock
+    product.tree_plantations.where('tree_plantations.trees_quantity >= 0')
+           &.reorder(trees_quantity: :desc)&.first
+  end
 
   def url_certificate
     url_for(certificate_background)
@@ -186,16 +192,24 @@ class LineItem < ApplicationRecord
     order.to_correct_delivery_type
   end
 
-  def plantation_with_largest_stock
-    product.tree_plantations.where('tree_plantations.trees_quantity >= 0')
-           &.reorder(trees_quantity: :desc)&.first
-  end
-
   def sufficient_plantation_stock
-    unless plantation_with_stock
-      message = I18n.t('insufficient_stock')
-      count = plantation_with_largest_stock&.trees_quantity || 0
-      errors.add(:quantity, :insufficient_stock, message: message, count: count)
+    qtty_diff = quantity - quantity_was
+    return if persisted? && !qtty_diff.positive?
+
+    if persisted?
+      unless plantation_with_stock(qtty_diff)
+        message = I18n.t('insufficient_stock')
+        count = plantation_with_stock(qtty_diff)&.trees_quantity ||
+                plantation_with_largest_stock&.trees_quantity ||  0
+        errors.add(:quantity, :insufficient_stock, message: message, count: count)
+      end
+    else
+      unless plantation_with_stock
+        message = I18n.t('insufficient_stock')
+        count = plantation_with_stock&.trees_quantity ||
+                plantation_with_largest_stock&.trees_quantity ||  0
+        errors.add(:quantity, :insufficient_stock, message: message, count: count)
+      end
     end
   end
 end

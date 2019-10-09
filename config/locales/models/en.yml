@@ -54,6 +54,8 @@ en:
         amount_currency: "Currency of the discount"
         amount_min_order_cents: "Minimum amount of the order"
         amount_min_order_currency: "Currency of the minimum of the order"
+      line_item:
+        quantity: ""
       order:
         aasm_state: "State of the order"
         aasm_state/in_cart: "Cart"
@@ -89,7 +91,7 @@ en:
         line_item:
           attributes:
             quantity:
-              insufficient_stock: 'left: %{count} trees'
+              insufficient_stock: 'Only %{count} tree(s) left in this plantation'
         tree_plantation:
           attributes:
             trees_quantity:
