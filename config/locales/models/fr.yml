@@ -265,7 +265,7 @@ fr:
         line_item:
           attributes:
             quantity:
-              insufficient_stock: 'Il ne reste que %{count} arbre(s) disponible(s) dans cette parcelle'
+              insufficient_stock: 'Il ne reste que %{count} arbre(s) dans cette parcelle'
         tree_plantation:
           attributes:
             trees_quantity:
