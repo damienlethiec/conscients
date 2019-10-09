@@ -53,7 +53,7 @@ class LineItemsController < ApplicationController
   end
 
   def quantity
-    params.dig(:line_item, :quantity)
+    @quantity = params.dig(:line_item, :quantity)
   end
 
   def line_item_params
