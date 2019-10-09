@@ -27,7 +27,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = params.fetch(:locale, I18n.default_locale).to_sym
+    locale = params.fetch(:locale, I18n.default_locale).to_sym
+    I18n.locale = I18n.exists?(locale) ? locale : I18n.default_locale
   end
 
   def default_url_options
@@ -72,5 +73,15 @@ class ApplicationController < ActionController::Base
 
   def redirect_if_unsigned
     redirect_to(root_path, notice: t('flash.clients.show.notice')) && return unless current_client
+  end
+
+  def cancel_stripe_payment_intent
+    return unless @cart.payment_intent_id
+
+    id = @cart.payment_intent_id
+    @cart.update payment_intent_id: nil
+    Stripe::PaymentIntent.cancel id
+  rescue Stripe::InvalidRequestError => e
+    Rails.logger.error e
   end
 end

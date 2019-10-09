@@ -1,15 +1,18 @@
-<div class="padding-t mb-5">
+<div class="padding-t mb-5" data-controller="payment">
   <h2 class="box-green-text pt-resp-16 pb-resp-16"><%= t('.select_payment_method') %></h2>
-  <p class="box-green-text"><%= t('.select_payment_method_details') %></p>
+  <p class="box-green-text" data-target='payment.paymentMethods'><%= t('.select_payment_method_details') %></p>
   <div class="payment-box">
 
-    <%= render 'stripe_button', cart: cart %>
+  <button class="btn conscients-btn btn-white btn-pay border-red w-100" data-target="payment.method" data-action="click->payment#showStripeForm">
+    <%= image_tag "credit-card.png", title: "CB", height: 20 %>
+  </button>
+  <%= render 'stripe_form', cart: cart %>
 
-  <%= link_to create_paypal_payments_path, method: :post, class: "btn conscients-btn btn-white btn-pay border-paypal" do %>
+  <%= link_to create_paypal_payments_path, method: :post, class: 'btn conscients-btn btn-white btn-pay border-paypal', data: { target: 'payment.method' } do %>
     <%= image_tag "paypal.png", title: "PAYPAL", height: 20 %>
   <% end %>
 
-  <%= link_to t('.bank_transfer'), create_bank_transfer_payments_path, method: :post, title: t('.bank_transfer'), class: "btn conscients-btn btn-white btn-pay border-green" %>
+  <%= link_to t('.bank_transfer'), create_bank_transfer_payments_path, method: :post, title: t('.bank_transfer'), class: 'btn conscients-btn btn-white btn-pay border-green', data: { target: 'payment.method' } %>
 
   </div>
 </div>

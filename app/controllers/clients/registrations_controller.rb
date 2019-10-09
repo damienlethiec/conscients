@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Clients::RegistrationsController < DeviseInvitable::RegistrationsController
+  # rubocop:disable Metrics/PerceivedComplexity
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def create
     build_resource(sign_up_params)
 
@@ -31,6 +34,9 @@ class Clients::RegistrationsController < DeviseInvitable::RegistrationsControlle
       # custom end
     end
   end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/PerceivedComplexity
 
   private
 

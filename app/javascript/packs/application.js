@@ -7,6 +7,7 @@ import { definitionsFromContext } from "stimulus/webpack-helpers";
 import "social-likes-next";
 import "social-likes-next/lib/social-likes_flat.css";
 import "../src/js/show_on_scroll";
+// import "../components/stripe-elements";
 import "../plugins/bootstrap";
 import "../plugins/flatpickr";
 import "../plugins/gmaps";

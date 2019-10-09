@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     post :stop_impersonating, on: :collection
   end
 
+  post '/payment_intent_succeeded', to: 'webhooks/stripe/events#payment_intent_succeeded', as: 'payment_intent_succeeded'
+
   scope '(:locale)', locale: /en/ do
     root to: 'pages#home'
     devise_for :clients, skip: :omniauth_callbacks,
@@ -69,7 +71,7 @@ Rails.application.routes.draw do
       resources :deliveries, only: %i[new create]
       resources :payments, only: %i[new show] do
         collection do
-          post 'create_stripe'
+          post 'stripe_success'
           post 'create_paypal'
           post 'create_bank_transfer'
           get 'paypal_success'
@@ -82,6 +84,9 @@ Rails.application.routes.draw do
     resource :profile_password, only: %i[update]
 
     # permanent redirections
+    get '/my-tree-shirt', to: redirect(
+      '/blog_posts', status: 301
+    )
     get '/conscients-chez-lilli-bulle', to: redirect(
       '/', status: 301
     )
@@ -460,6 +465,10 @@ Rails.application.routes.draw do
     )
     resources :sitemap_tests, only: :index
 
+    %w[about b2b contact faq participate payment_shipping site_map terms].each do |static_page|
+      get "/#{static_page}", to: "pages##{static_page}"
+    end
+
     if Rails.env.production?
       get '*path', to: 'pages#home', constraints: lambda { |req|
         req.path.exclude? 'rails/active_storage'
@@ -467,6 +476,9 @@ Rails.application.routes.draw do
       post '*path', to: 'pages#home', constraints: lambda { |req|
         req.path.exclude? 'rails/active_storage'
       }
+      match '*path', to: 'pages#home', constraints: lambda { |req|
+        req.path.exclude? 'rails/active_storage'
+      }, via: %i[post put patch delete]
     end
   end
 end

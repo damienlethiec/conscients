@@ -22,6 +22,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  payment_details        :jsonb
+#  payment_intent_id      :string
 #
 # Foreign Keys
 #
@@ -49,7 +50,6 @@ RSpec.describe Order, type: :model do
 
   context '#current_delivery_fees_cents' do
     it 'returns  4.80 euros in shipping costs to France when a user purchases 1 tree product with a quantity of 1 - 1 certificate' do
-
       client = Client.create!(email: 'test@gmail.com', password: '12345678')
       order = Order.create!(client: client)
 
@@ -117,14 +117,13 @@ RSpec.describe Order, type: :model do
           address_2: '', city: 'Frederiksberg', zip_code: '2000', country: 'FR' }
       }
 
-      order, delivery_address, billing_address =
+      order, _delivery_address, _billing_address =
         LinkDeliveryInfoToCart.new(order, order_params, addresses_params).perform
 
       expect(order.current_delivery_fees_cents).to eq(480)
     end
 
     it 'returns  4.80 euros in shipping costs to France when a user purchases 1 tree product with a quantity of 10 - 1 certificate' do
-
       client = Client.create!(email: 'test@gmail.com', password: '12345678')
       order = Order.create!(client: client)
 
@@ -192,18 +191,17 @@ RSpec.describe Order, type: :model do
           address_2: '', city: 'Frederiksberg', zip_code: '2000', country: 'FR' }
       }
 
-      order, delivery_address, billing_address =
+      order, _delivery_address, _billing_address =
         LinkDeliveryInfoToCart.new(order, order_params, addresses_params).perform
 
       expect(order.current_delivery_fees_cents).to eq(480)
     end
 
     it 'returns  8.00 euros in shipping costs to France when a user purchases 5 separate tree products of unknown quantities - 5 certificates' do
-
       client = Client.create!(email: 'test@gmail.com', password: '12345678')
       order = Order.create!(client: client)
 
-      5.times.with_index do |idx|
+      5.times do |idx|
         product = Product.create!(
           id: idx,
           name_fr: "Arbre#{idx}",
@@ -271,18 +269,17 @@ RSpec.describe Order, type: :model do
           address_2: '', city: 'Frederiksberg', zip_code: '2000', country: 'FR' }
       }
 
-      order, delivery_address, billing_address =
+      order, _delivery_address, _billing_address =
         LinkDeliveryInfoToCart.new(order, order_params, addresses_params).perform
 
       expect(order.current_delivery_fees_cents).to eq(800)
     end
 
     it 'returns 13.50 euros in shipping costs to France when a user purchases 10 separate tree products of unknown quantities - 10 certificates' do
-
       client = Client.create!(email: 'test@gmail.com', password: '12345678')
       order = Order.create!(client: client)
 
-      10.times.with_index do |idx|
+      10.times do |idx|
         product = Product.create!(
           id: idx,
           name_fr: "Arbre#{idx}",
@@ -350,14 +347,13 @@ RSpec.describe Order, type: :model do
           address_2: '', city: 'Frederiksberg', zip_code: '2000', country: 'FR' }
       }
 
-      order, delivery_address, billing_address =
+      order, _delivery_address, _billing_address =
         LinkDeliveryInfoToCart.new(order, order_params, addresses_params).perform
 
       expect(order.current_delivery_fees_cents).to eq(1350)
     end
 
     it 'returns  9.00 euros in shipping costs to France when a user purchases 3 classic product with a total weight of 1500 grams' do
-
       client = Client.create!(email: 'test@gmail.com', password: '12345678')
       order = Order.create!(client: client)
 
@@ -377,7 +373,7 @@ RSpec.describe Order, type: :model do
       )
 
       product_sku = ProductSku.create!(product: product)
-      stock_entry = StockEntry.create!(product_sku: product_sku, quantity: 100)
+      StockEntry.create!(product_sku: product_sku, quantity: 100)
 
       line_item_params = {
         'product_sku_id': product_sku.id
@@ -408,14 +404,13 @@ RSpec.describe Order, type: :model do
           address_2: '', city: 'Frederiksberg', zip_code: '2000', country: 'FR' }
       }
 
-      order, delivery_address, billing_address =
+      order, _delivery_address, _billing_address =
         LinkDeliveryInfoToCart.new(order, order_params, addresses_params).perform
 
       expect(order.current_delivery_fees_cents).to eq(900)
     end
 
     it 'returns  9.80 euros in shipping costs to France when a user purchases 3 classic product with a total weight of 1500 grams, and 1 tree product with an unknown quantity - 1 certificate' do
-
       client = Client.create!(email: 'test@gmail.com', password: '12345678')
       order = Order.create!(client: client)
 
@@ -435,7 +430,7 @@ RSpec.describe Order, type: :model do
       )
 
       product_classic_sku = ProductSku.create!(product: product_classic)
-      stock_entry = StockEntry.create!(product_sku: product_classic_sku, quantity: 100)
+      StockEntry.create!(product_sku: product_classic_sku, quantity: 100)
 
       line_item_classic_params = {
         'product_sku_id': product_classic_sku.id
@@ -464,7 +459,7 @@ RSpec.describe Order, type: :model do
           address_2: '', city: 'Frederiksberg', zip_code: '2000', country: 'FR' }
       }
 
-      order, delivery_address, billing_address =
+      order, _delivery_address, _billing_address =
         LinkDeliveryInfoToCart.new(order, order_params, addresses_params).perform
 
       product_tree = Product.create!(
@@ -531,11 +526,10 @@ RSpec.describe Order, type: :model do
           address_2: '', city: 'Frederiksberg', zip_code: '2000', country: 'FR' }
       }
 
-      order, delivery_address, billing_address =
+      order, _delivery_address, _billing_address =
         LinkDeliveryInfoToCart.new(order, order_params, addresses_params).perform
 
       expect(order.current_delivery_fees_cents).to eq(980)
     end
   end
 end
-

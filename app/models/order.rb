@@ -22,6 +22,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  payment_details        :jsonb
+#  payment_intent_id      :string
 #
 # Foreign Keys
 #
@@ -179,7 +180,7 @@ class Order < ApplicationRecord
     return 0 if email?
 
     line_items.inject(0) do |sum, line_item|
-      line_item.tree?  ? sum + PRINTING_FEES : sum
+      line_item.tree? ? sum + PRINTING_FEES : sum
     end
   end
 
@@ -266,7 +267,7 @@ class Order < ApplicationRecord
   def translated_hash_permitted_events
     Hash[I18n.t('activerecord.attributes.order.aasm_events')
              .select { |k, _| permitted_events_names.include?(k) }
-         .values.zip(permitted_events_names)]
+             .values.zip(permitted_events_names)]
   end
 
   def delivery_is_billing?

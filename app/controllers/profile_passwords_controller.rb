@@ -13,6 +13,8 @@ class ProfilePasswordsController < ProfilesController
 
   private
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def update_with_password(params)
     current_password = params.delete(:current_password)
 
@@ -31,15 +33,17 @@ class ProfilePasswordsController < ProfilesController
              else
                current_client.assign_attributes(password: params[:password])
                bypass_sign_in(current_client.reload, scope: :client)
-
                current_client.valid?
-               current_client.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+               current_password_error = current_password.blank? ? :blank : :invalid
+               current_client.errors.add(:current_password, current_password_error)
                false
-    end
+             end
 
     params.delete(:password)
     result
   end
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 
   def password_params
     params.require(:client).permit(:current_password, :password)

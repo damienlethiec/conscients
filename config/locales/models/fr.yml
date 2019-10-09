@@ -180,7 +180,7 @@ fr:
         product_sku: "UGS produit"
         order: "Commande"
         tree_plantation: "Plantation d'arbres"
-        quantity: "Quantité"
+        quantity: ""
         recipient_name: "Attribué à"
         recipient_message: "Message"
         certificate_date: "Date du certificat"
@@ -265,7 +265,7 @@ fr:
         line_item:
           attributes:
             quantity:
-              insufficient_stock: 'restante: %{count} arbres'
+              insufficient_stock: 'Il ne reste que %{count} arbre(s) dans cette parcelle'
         tree_plantation:
           attributes:
             trees_quantity:

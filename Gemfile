@@ -13,7 +13,7 @@ gem 'mobility', '~> 0.5'
 gem 'rails-i18n', '~> 5.1'
 
 gem 'uglifier', '~> 4.1'
-gem 'webpacker', '~> 3.4'
+gem 'webpacker', '~> 4.0.7'
 
 gem 'aws-sdk-s3', '~> 1.13', require: false
 gem 'jbuilder', '~> 2.5'
@@ -55,7 +55,7 @@ gem 'responders', '~> 2.4'
 gem 'aasm', '~> 4.12'
 gem 'money-rails', '~> 1.11'
 gem 'paypal-sdk-rest', '~> 1.7'
-gem 'stripe', '~> 3.13'
+gem 'stripe', '~> 5.1.1'
 
 gem 'kaminari', '~> 1.1'
 gem 'pg_search', '~> 2.1'
@@ -76,13 +76,12 @@ gem 'pretender' # login as any user
 group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'factory_bot_rails'
+  gem 'faker'
   gem 'pry-byebug', '~> 3.6'
   gem 'pry-rails', '~> 0.3'
   gem 'rspec-rails'
-  gem 'selenium-webdriver'
-  # gem 'factory_bot'
-  gem 'factory_bot_rails'
-  gem 'faker'
+  gem 'webdrivers', '~> 4.0'
 end
 
 group :development do
