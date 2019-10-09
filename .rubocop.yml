@@ -7,6 +7,7 @@ Metrics/LineLength:
   Max: 100
   Exclude:
     - config/routes.rb
+    - spec/models/*.rb
 
 AllCops:
   Exclude:
@@ -43,6 +44,7 @@ Metrics/BlockLength:
     - app/admin/*
     - app/models/order.rb
     - spec/features/*.rb
+    - spec/models/*.rb
 
 Metrics/MethodLength:
   Exclude:
@@ -63,6 +65,9 @@ Lint/UselessAssignment:
     - app/models/category.rb
 
 Layout/AlignHash:
+  Enabled: False
+
+Naming/MemoizedInstanceVariableName:
   Enabled: False
 
 Style/AsciiComments:

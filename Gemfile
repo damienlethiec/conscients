@@ -76,12 +76,12 @@ gem 'pretender' # login as any user
 group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'factory_bot_rails'
+  gem 'faker'
   gem 'pry-byebug', '~> 3.6'
   gem 'pry-rails', '~> 0.3'
   gem 'rspec-rails'
   gem 'webdrivers', '~> 4.0'
-  gem 'factory_bot_rails'
-  gem 'faker'
 end
 
 group :development do

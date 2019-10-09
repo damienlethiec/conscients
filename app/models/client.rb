@@ -79,14 +79,12 @@ class Client < ApplicationRecord
   end
 
   # Build markers for producers and tree plantations for the client admin
-  # rubocop:disable Metrics/AbcSize
   def markers
     line_items.paid.includes(:product_sku).map do |line_item|
       line_item.producer_marker if line_item.producer_marker?
       line_item.tree_plantation_marker if line_item.tree_marker?
     end.uniq
   end
-  # rubocop:enable Metrics/AbcSize
 
   def tree_species_planted
     tree_plantations.pluck(:tree_specie).uniq

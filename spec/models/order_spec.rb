@@ -117,7 +117,7 @@ RSpec.describe Order, type: :model do
           address_2: '', city: 'Frederiksberg', zip_code: '2000', country: 'FR' }
       }
 
-      order, delivery_address, billing_address =
+      order, _delivery_address, _billing_address =
         LinkDeliveryInfoToCart.new(order, order_params, addresses_params).perform
 
       expect(order.current_delivery_fees_cents).to eq(480)
@@ -191,7 +191,7 @@ RSpec.describe Order, type: :model do
           address_2: '', city: 'Frederiksberg', zip_code: '2000', country: 'FR' }
       }
 
-      order, delivery_address, billing_address =
+      order, _delivery_address, _billing_address =
         LinkDeliveryInfoToCart.new(order, order_params, addresses_params).perform
 
       expect(order.current_delivery_fees_cents).to eq(480)
@@ -269,7 +269,7 @@ RSpec.describe Order, type: :model do
           address_2: '', city: 'Frederiksberg', zip_code: '2000', country: 'FR' }
       }
 
-      order, delivery_address, billing_address =
+      order, _delivery_address, _billing_address =
         LinkDeliveryInfoToCart.new(order, order_params, addresses_params).perform
 
       expect(order.current_delivery_fees_cents).to eq(800)
@@ -347,7 +347,7 @@ RSpec.describe Order, type: :model do
           address_2: '', city: 'Frederiksberg', zip_code: '2000', country: 'FR' }
       }
 
-      order, delivery_address, billing_address =
+      order, _delivery_address, _billing_address =
         LinkDeliveryInfoToCart.new(order, order_params, addresses_params).perform
 
       expect(order.current_delivery_fees_cents).to eq(1350)
@@ -373,7 +373,7 @@ RSpec.describe Order, type: :model do
       )
 
       product_sku = ProductSku.create!(product: product)
-      stock_entry = StockEntry.create!(product_sku: product_sku, quantity: 100)
+      StockEntry.create!(product_sku: product_sku, quantity: 100)
 
       line_item_params = {
         'product_sku_id': product_sku.id
@@ -404,7 +404,7 @@ RSpec.describe Order, type: :model do
           address_2: '', city: 'Frederiksberg', zip_code: '2000', country: 'FR' }
       }
 
-      order, delivery_address, billing_address =
+      order, _delivery_address, _billing_address =
         LinkDeliveryInfoToCart.new(order, order_params, addresses_params).perform
 
       expect(order.current_delivery_fees_cents).to eq(900)
@@ -430,7 +430,7 @@ RSpec.describe Order, type: :model do
       )
 
       product_classic_sku = ProductSku.create!(product: product_classic)
-      stock_entry = StockEntry.create!(product_sku: product_classic_sku, quantity: 100)
+      StockEntry.create!(product_sku: product_classic_sku, quantity: 100)
 
       line_item_classic_params = {
         'product_sku_id': product_classic_sku.id
@@ -459,7 +459,7 @@ RSpec.describe Order, type: :model do
           address_2: '', city: 'Frederiksberg', zip_code: '2000', country: 'FR' }
       }
 
-      order, delivery_address, billing_address =
+      order, _delivery_address, _billing_address =
         LinkDeliveryInfoToCart.new(order, order_params, addresses_params).perform
 
       product_tree = Product.create!(
@@ -526,7 +526,7 @@ RSpec.describe Order, type: :model do
           address_2: '', city: 'Frederiksberg', zip_code: '2000', country: 'FR' }
       }
 
-      order, delivery_address, billing_address =
+      order, _delivery_address, _billing_address =
         LinkDeliveryInfoToCart.new(order, order_params, addresses_params).perform
 
       expect(order.current_delivery_fees_cents).to eq(980)

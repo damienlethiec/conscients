@@ -24,10 +24,10 @@ class AddItemToCart
   end
 
   def add_attributes_certicable_line_item
-    if plantation_with_stock
-      set_tree_plantation
-      add_plantation_attributes_to_line_item
-    end
+    return unless plantation_with_stock
+
+    set_tree_plantation
+    add_plantation_attributes_to_line_item
   end
 
   # Quantity is 0 by default but could be more if line item already in cart (and just updated)

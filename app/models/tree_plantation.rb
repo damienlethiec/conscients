@@ -77,23 +77,22 @@ class TreePlantation < ApplicationRecord
 
   def generate_certificate_number
     update certificate_counter: certificate_counter + 1
-    base_certificate_uuid + "-#{format '%03d', certificate_counter}"
+    base_certificate_uuid + "-#{format '%<counter>03d', counter: certificate_counter}"
   end
 
   def match_base_tree_quantity
     self.base_tree_quantity = trees_quantity
   end
 
-  # rubocop:disable Metrics/AbcSize
   def alert_on_zero_quantity
     return unless quantity != quantity_was && quantity_was.positive? && quantity.zero?
 
+    ids = product_ids.join('|')
     ContactMailer.with(
-      subject: "Stock alert TreePlantation: #{project_name} - product_ids: #{product_ids.join('|')}",
-      message: "The quantity reached 0. This could impact products with the ids:  #{product_ids.join('|')}"
+      subject: "Stock alert TreePlantation: #{project_name} - product_ids: #{ids}",
+      message: "The quantity reached 0. This could impact products with the ids:  #{ids}"
     ).stock_alert.deliver_later
   end
-  # rubocop:enable Metrics/AbcSize
 
   private
 

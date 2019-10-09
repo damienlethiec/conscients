@@ -194,22 +194,26 @@ class LineItem < ApplicationRecord
 
   def sufficient_plantation_stock
     qtty_diff = quantity - quantity_was
-    return if persisted? && !qtty_diff.positive?
+    return unless qtty_diff.positive?
 
-    if persisted?
-      unless plantation_with_stock(qtty_diff)
-        message = I18n.t('insufficient_stock')
-        count = plantation_with_stock(qtty_diff)&.trees_quantity ||
-                plantation_with_largest_stock&.trees_quantity ||  0
-        errors.add(:quantity, :insufficient_stock, message: message, count: count)
-      end
-    else
-      unless plantation_with_stock
-        message = I18n.t('insufficient_stock')
-        count = plantation_with_stock&.trees_quantity ||
-                plantation_with_largest_stock&.trees_quantity ||  0
-        errors.add(:quantity, :insufficient_stock, message: message, count: count)
-      end
-    end
+    persisted? ? check_stock_update(qtty_diff) : check_stock_new(qtty_diff)
+  end
+
+  def check_stock_new(_qtty_diff)
+    return if plantation_with_stock
+
+    message = I18n.t('insufficient_stock')
+    count = plantation_with_stock&.trees_quantity ||
+            plantation_with_largest_stock&.trees_quantity || 0
+    errors.add(:quantity, :insufficient_stock, message: message, count: count)
+  end
+
+  def check_stock_update(qtty_diff)
+    return if plantation_with_stock(qtty_diff)
+
+    message = I18n.t('insufficient_stock')
+    count = plantation_with_stock(qtty_diff)&.trees_quantity ||
+            plantation_with_largest_stock&.trees_quantity || 0
+    errors.add(:quantity, :insufficient_stock, message: message, count: count)
   end
 end

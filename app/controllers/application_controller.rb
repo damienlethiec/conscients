@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     locale = params.fetch(:locale, I18n.default_locale).to_sym
-    I18n.locale = I18n.exists? locale || I18n.default_locale
+    I18n.locale = I18n.exists?(locale) ? locale : I18n.default_locale
   end
 
   def default_url_options
@@ -81,6 +81,7 @@ class ApplicationController < ActionController::Base
     id = @cart.payment_intent_id
     @cart.update payment_intent_id: nil
     Stripe::PaymentIntent.cancel id
-  rescue Stripe::InvalidRequestError
+  rescue Stripe::InvalidRequestError => e
+    Rails.logger.error e
   end
 end

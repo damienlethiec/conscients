@@ -18,13 +18,17 @@ class CreateStripePaymentIntent
     elsif stripe_customers_with_client_email.present?
       stripe_customers_with_client_email.first
     else
-      new_customer = Stripe::Customer.create(
-        description: "Customer for #{@cart.client_email}",
-        email:  @cart.client_email
-      )
-      @cart.client.update(stripe_customer_id: new_customer.id)
-      new_customer
+      create_customer
     end
+  end
+
+  def create_customer
+    new_customer = Stripe::Customer.create(
+      description: "Customer for #{@cart.client_email}",
+      email:  @cart.client_email
+    )
+    @cart.client.update(stripe_customer_id: new_customer.id)
+    new_customer
   end
 
   def payment_intent
@@ -38,7 +42,7 @@ class CreateStripePaymentIntent
   end
 
   def stripe_customers_with_client_email
-    @_stripe_customers_with_client_email ||= Stripe::Customer.list(email: @cart.client_email)
+    @stripe_customers_with_client_email ||= Stripe::Customer.list(email: @cart.client_email)
   end
 
   def amount
