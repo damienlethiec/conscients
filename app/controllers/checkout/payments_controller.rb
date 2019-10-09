@@ -7,7 +7,7 @@ class Checkout::PaymentsController < ApplicationController
   def new
     redirect_to(cart_path(@cart)) && return if @cart.ht_price_cents.zero?
 
-    @intent = Payment::Intent.fetch(@cart)
+    @intent = intent
   end
 
   def stripe_success
@@ -39,5 +39,11 @@ class Checkout::PaymentsController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+  end
+
+  def intent
+    return Struct.new('PaymentIntent', :client_secret).new if Rails.env.test?
+
+    Payment::Intent.fetch(@cart)
   end
 end
