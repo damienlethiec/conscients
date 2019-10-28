@@ -55,4 +55,20 @@
       </table>
     </div>
   </div>
+  <% if @docs.present? %>
+    <div class="container mb-5">
+      <div class="page-font text-center py-5">
+        <h2><%= t('.documentation') %></h2>
+      </div>
+      <div class="border-resp">
+        <table class="conscients-table-responsive">
+          <tbody>
+            <% @docs.each do |doc| %>
+              <%= render 'doc', tree_plantation_id: doc[:tp_id], type: doc[:type], filename: doc[:filename]  %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>
 </div>

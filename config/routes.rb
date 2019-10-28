@@ -65,6 +65,16 @@ Rails.application.routes.draw do
         resources :downloads, only: :new
       end
     end
+    resource :producer_presentations, only: [] do
+      scope module: :producer_presentations do
+        resources :downloads, only: :new
+      end
+    end
+    resource :project_presentations, only: [] do
+      scope module: :project_presentations do
+        resources :downloads, only: :new
+      end
+    end
     # Routes for the checkout process --> Cart leads to deliveries choice leads to payments
     scope module: :checkout do
       resources :carts, only: :show

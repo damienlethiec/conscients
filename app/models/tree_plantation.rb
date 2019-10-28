@@ -26,6 +26,8 @@ class TreePlantation < ApplicationRecord
   has_many :line_items, dependent: :destroy
   has_many :orders, through: :line_items
   has_one_attached :klm_file
+  has_one_attached :producer_presentation
+  has_one_attached :project_presentation
   has_many :product_tree_plantations, dependent: :destroy
   has_many :product, through: :product_tree_plantations
 
