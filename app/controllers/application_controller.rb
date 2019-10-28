@@ -27,8 +27,13 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    locale = params.fetch(:locale, I18n.default_locale).to_sym
-    I18n.locale = I18n.exists?(locale) ? locale : I18n.default_locale
+    return I18n.default_locale if params[:locale].present? && !locale_exists?
+
+    I18n.locale = params.fetch(:locale, I18n.default_locale).to_sym
+  end
+
+  def locale_exists?
+    I18n.available_locales.include?(params[:locale].to_sym)
   end
 
   def default_url_options
