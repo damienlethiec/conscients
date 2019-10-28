@@ -232,6 +232,9 @@ fr:
         tree_specie: "Espèce d'arbre"
         producer_name: "Nom du producteur"
         trees_quantity: "Quantité d'arbres disponibles"
+        klm_file: Fichier klm
+        producer_presentation: Présentation du projet
+        project_presentation: Présentation du producteur
       ahoy/event:
         visit: "Visite"
         user: "Utilisateur"

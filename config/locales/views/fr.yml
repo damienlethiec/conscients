@@ -252,6 +252,7 @@ fr:
       delivered_to: Livré à
     impact:
       my_plantations: Mes plantations
+      documentation: Documentation
       trees_planted_amount: "%{quantity} arbres plantés"
       trees_planted: "arbres plantés"
       trees_specie_planted: Espèce plantée

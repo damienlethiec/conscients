@@ -1,0 +1,10 @@
+<tr class="desktop-border-bottom td-font text-center">
+  <td>
+    <%= link_to filename, send("new_#{type}s_download_path", tree_plantation_id: tree_plantation_id) %>
+  </td>
+  <td>
+    <%= link_to send("new_#{type}s_download_path", tree_plantation_id: tree_plantation_id) do %>
+      <%= fa_icon "cloud-download", class: "c-pointer mr-3 color-green" %>
+    <% end %>
+  </td>
+</tr>
