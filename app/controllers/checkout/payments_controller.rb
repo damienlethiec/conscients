@@ -11,6 +11,9 @@ class Checkout::PaymentsController < ApplicationController
   end
 
   def stripe_success
+    @cart.stripe!
+    @cart.pay!
+    @cart.save
     redirect_to payment_path(@cart)
   end
 
