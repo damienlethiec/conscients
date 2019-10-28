@@ -17,7 +17,7 @@ gem 'webpacker', '~> 4.0.7'
 
 gem 'aws-sdk-s3', '~> 1.13', require: false
 gem 'jbuilder', '~> 2.5'
-gem 'mini_magick', '~> 4.8'
+gem 'mini_magick', '~> 4.9.1'
 gem 'redis', '~> 4.0'
 
 gem 'bootsnap', '~> 1.3', require: false
