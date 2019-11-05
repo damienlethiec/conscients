@@ -39,11 +39,11 @@ class LineItem < ApplicationRecord
   monetize :ttc_price_cents, :ht_price_cents
 
   validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 1 }
-  validates :recipient_name, presence: true, if: -> { :tree? || :personalized? }
+  validates :recipient_name, presence: true, if: :tree_or_personalized?
   validates :recipient_name, length: { maximum: 32 }
   validates :recipient_message, length: { maximum: 110 }
-  validates :certificate_date, presence: true, if: -> { :tree? || :personalized? }
-  validate :sufficient_plantation_stock, if: -> { :tree? || :personalized? }
+  validates :certificate_date, presence: true, if: :tree_or_personalized?
+  validate :sufficient_plantation_stock, if: :tree_or_personalized?
 
   # Increment and decrement stock quantities
   before_validation :manage_stock_quantites_if_change_sku,
@@ -163,6 +163,10 @@ class LineItem < ApplicationRecord
   def plantation_with_largest_stock
     product.tree_plantations.where('tree_plantations.trees_quantity >= 0')
            &.reorder(trees_quantity: :desc)&.first
+  end
+
+  def tree_or_personalized?
+    tree? || personalized?
   end
 
   def url_certificate
