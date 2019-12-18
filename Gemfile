@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'pg', '>= 0.18'
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 gem 'rails', '5.2.2'
 
 gem 'friendly_id-mobility', '~> 0.5'
@@ -29,7 +29,7 @@ gem 'sidekiq-failures', '~> 1.0'
 
 # Analytics for rails --> https://github.com/ankane/ahoy
 gem 'ahoy_matey', '~> 2.0'
-gem 'devise', '~> 4.7.1'
+gem 'devise', '~> 4.7'
 gem 'devise-i18n', '~> 1.6'
 gem 'devise_invitable', '~> 1.7', '>= 1.7.5'
 gem 'gibbon', '~> 3.2'
