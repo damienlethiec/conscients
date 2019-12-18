@@ -16,13 +16,11 @@ class NewsletterSubscriptionsController < ApplicationController
   private
 
   def add_to_list(list_id)
-    begin
-      Gibbon::Request.lists(list_id)
-                     .members(Digest::MD5.hexdigest(params['email'].downcase))
-                     .upsert(body:
-                          { email_address: params['email'].downcase, status: 'subscribed' })
-    rescue Gibbon::MailChimpError => e
-      Rails.logger.error("failed cuz #{e.detail} #{e.raw_body}")
-    end
+    Gibbon::Request.lists(list_id)
+                   .members(Digest::MD5.hexdigest(params['email'].downcase))
+                   .upsert(body:
+                        { email_address: params['email'].downcase, status: 'subscribed' })
+  rescue Gibbon::MailChimpError => e
+    Rails.logger.error("failed cuz #{e.detail} #{e.raw_body}")
   end
 end

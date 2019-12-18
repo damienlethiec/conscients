@@ -43,6 +43,7 @@ Metrics/BlockLength:
     - app/admin/*
     - app/models/order.rb
     - spec/features/*.rb
+    - spec/models/*.rb
 
 Metrics/MethodLength:
   Exclude:
@@ -62,7 +63,10 @@ Lint/UselessAssignment:
   Exclude:
     - app/models/category.rb
 
-Layout/AlignHash:
+Lint/SuppressedException:
+  Enabled: False
+
+Layout/HashAlignment:
   Enabled: False
 
 Style/AsciiComments:
@@ -94,3 +98,6 @@ Rails/UnknownEnv:
     - development
     - test
     - staging
+
+Style/FormatStringToken:
+  Enabled: False

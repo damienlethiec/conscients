@@ -26,10 +26,12 @@ class ApplicationController < ActionController::Base
     redirect_to request.referer || root_path
   end
 
+  # rubocop:disable Lint/RequireParentheses
   def set_locale
     locale = params.fetch(:locale, I18n.default_locale).to_sym
-    I18n.locale = I18n.exists? locale ? locale : I18n.default_locale
+    I18n.locale = I18n.exists? locale || I18n.default_locale
   end
+  # rubocop:enable Lint/RequireParentheses
 
   def default_url_options
     { locale: I18n.locale == I18n.default_locale ? nil : I18n.locale }

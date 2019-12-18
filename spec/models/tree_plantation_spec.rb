@@ -58,7 +58,7 @@ RSpec.describe TreePlantation, type: :model do
     tp_ten_first = create(:tree_plantation, trees_quantity: 10,
       project_name: 'Amazonia', project_type: 'type type', partner: 'La Fondacion',
       latitude: 0.434079e2, longitude: 0.37008e1, base_certificate_uuid: 'ABC')
-    tp_ten_second = create(:tree_plantation, trees_quantity: 10,
+    create(:tree_plantation, trees_quantity: 10,
       project_name: 'Amazonia', project_type: 'type type', partner: 'La Fondacion',
       latitude: 0.434079e2, longitude: 0.37008e1, base_certificate_uuid: 'ABC')
     tp_hundred = create(:tree_plantation, trees_quantity: 100,
