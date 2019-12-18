@@ -17,6 +17,8 @@ module Payment
     private
 
     def new_intent
+      return if Rails.env.test?
+
       CreateStripePaymentIntent.new(@cart).perform
     end
 
@@ -26,13 +28,13 @@ module Payment
 
     def updated_intent
       Stripe::PaymentIntent.update(
-        @cart.payment_intent_id, {
+        @cart.payment_intent_id,
         amount: amount,
         metadata: {
           shipping_cents: shipping_cents,
           subtotal_cents: subtotal_cents
         }
-      })
+      )
     end
 
     def amount
