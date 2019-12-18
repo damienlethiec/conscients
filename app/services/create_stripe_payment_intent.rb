@@ -33,7 +33,11 @@ class CreateStripePaymentIntent
       currency: currency,
       payment_method_types: ['card'],
       description: "PaymentIntent for order ##{@cart.id}",
-      customer: customer
+      customer: customer,
+      metadata: {
+        shipping_cents: shipping_cents,
+        subtotal_cents: subtotal_cents
+      }
     )
   end
 
@@ -43,6 +47,14 @@ class CreateStripePaymentIntent
 
   def amount
     @cart.ttc_price_all_included.fractional
+  end
+
+  def shipping_cents
+    @cart.current_delivery_fees_cents
+  end
+
+  def subtotal_cents
+    @cart.ttc_price_with_coupon_cents
   end
 
   def currency
