@@ -17,6 +17,8 @@ module Payment
     private
 
     def new_intent
+      return if Rails.env.test?
+
       CreateStripePaymentIntent.new(@cart).perform
     end
 
