@@ -25,8 +25,8 @@ groups:
     - active_storage_attachments
     - active_storage_blobs
     - addresses
-    - ahoy_events
-    - ahoy_visits
+    # - ahoy_events
+    # - ahoy_visits
     - blog_posts
     - categories
     - categorizations
