@@ -145,6 +145,11 @@ ActiveAdmin.register Product do
       f.input :producer_longitude
     end
     f.actions
+    if f.object.errors.present?
+      panel 'Erreurs !' do
+        f.object.errors.full_messages.join(', ')
+      end
+    end
   end
 
   show do
