@@ -110,9 +110,9 @@ ActiveAdmin.register Order do
               as: :select, collection: f.object.translated_hash_permitted_events
       f.input :client
       f.input :coupon
-      f.input :delivery_address, as: :select, selected: f.object.delivery_address.id,
+      f.input :delivery_address, as: :select, selected: f.object.delivery_address&.id,
               collection: f.object.client_addresses&.collect { |a| [a.to_s, a.id] }
-      f.input :billing_address, as: :select, selected: f.object.billing_address.id,
+      f.input :billing_address, as: :select, selected: f.object.billing_address&.id,
               collection: f.object.client_addresses&.collect { |a| [a.to_s, a.id] }
       f.input :delivery_method
       f.input :payment_method

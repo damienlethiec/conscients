@@ -3,11 +3,6 @@ require: rubocop-rails
 Rails:
   Enabled: true
 
-Metrics/LineLength:
-  Max: 100
-  Exclude:
-    - config/routes.rb
-    - spec/models/*.rb
 
 AllCops:
   Exclude:
@@ -64,8 +59,17 @@ Lint/UselessAssignment:
   Exclude:
     - app/models/category.rb
 
-Layout/AlignHash:
+Lint/SuppressedException:
   Enabled: False
+
+Layout/HashAlignment:
+  Enabled: False
+
+Metrics/LineLength:
+  Max: 100
+  Exclude:
+    - config/routes.rb
+    - spec/models/*.rb
 
 Naming/MemoizedInstanceVariableName:
   Enabled: False
@@ -99,3 +103,15 @@ Rails/UnknownEnv:
     - development
     - test
     - staging
+
+Style/FormatStringToken:
+  Enabled: False
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true

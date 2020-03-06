@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'pg', '>= 0.18'
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 gem 'rails', '5.2.2'
 
 gem 'friendly_id-mobility', '~> 0.5'
@@ -103,8 +103,8 @@ group :development do
   gem 'xray-rails', '~> 0.3'
 
   gem 'brakeman', '~> 4.2', require: false
-  gem 'overcommit', '~> 0.44'
-  gem 'rubocop-rails', require: false
+  gem 'overcommit', '~> 0.52'
+  gem 'rubocop-rails', '2.4.0', require: false
 
   gem 'guard', '~> 2.14'
   gem 'guard-bundler', '~> 2.1', require: false

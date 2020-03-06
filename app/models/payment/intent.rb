@@ -11,13 +11,42 @@ module Payment
     end
 
     def fetch
-      @cart.payment_intent_id ? payment_intent : CreateStripePaymentIntent.new(@cart).perform
+      intent_exists? ? updated_intent : new_intent
     end
 
     private
 
-    def payment_intent
-      Stripe::PaymentIntent.retrieve(@cart.payment_intent_id)
+    def new_intent
+      return if Rails.env.test?
+
+      CreateStripePaymentIntent.new(@cart).perform
+    end
+
+    def intent_exists?
+      !@cart.payment_intent_id.nil?
+    end
+
+    def updated_intent
+      Stripe::PaymentIntent.update(
+        @cart.payment_intent_id,
+        amount: amount,
+        metadata: {
+          shipping_cents: shipping_cents,
+          subtotal_cents: subtotal_cents
+        }
+      )
+    end
+
+    def amount
+      @cart.ttc_price_all_included.fractional
+    end
+
+    def shipping_cents
+      @cart.current_delivery_fees_cents
+    end
+
+    def subtotal_cents
+      @cart.ttc_price_with_coupon_cents
     end
   end
 end

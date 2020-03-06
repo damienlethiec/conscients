@@ -23,15 +23,15 @@ class ClientsController < ApplicationController
   def documentation
     @docs = []
     @line_items.map(&:tree_plantation)&.compact&.map do |tp|
+      if tp.producer_presentation.attached?
+        @docs << { tp_id: tp.id, type: :producer_presentation,
+          filename: tp.producer_presentation.blob.filename.to_s }
+      end
 
-      @docs << { tp_id: tp.id, type: :producer_presentation,
-        filename: tp.producer_presentation.blob.filename.to_s
-      } if tp.producer_presentation.attached?
-
-      @docs << { tp_id: tp.id, type: :project_presentation,
-        filename: tp.project_presentation.blob.filename.to_s
-      } if tp.project_presentation.attached?
-
+      if tp.project_presentation.attached?
+        @docs << { tp_id: tp.id, type: :project_presentation,
+          filename: tp.project_presentation.blob.filename.to_s }
+      end
     end
     @docs.uniq! { |doc| doc[:filename] }
   end

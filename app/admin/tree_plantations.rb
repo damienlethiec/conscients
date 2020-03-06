@@ -85,10 +85,14 @@ ActiveAdmin.register TreePlantation do
         I18n.t('active_admin.attachement_uploaded') if tree_plantation.klm_file.attached?
       end
       row :producer_presentation do |tree_plantation|
-        I18n.t('active_admin.attachement_uploaded') if tree_plantation.producer_presentation.attached?
+        if tree_plantation.producer_presentation.attached?
+          I18n.t('active_admin.attachement_uploaded')
+        end
       end
       row :project_presentation do |tree_plantation|
-        I18n.t('active_admin.attachement_uploaded') if tree_plantation.project_presentation.attached?
+        if tree_plantation.project_presentation.attached?
+          I18n.t('active_admin.attachement_uploaded')
+        end
       end
       row :created_at
       row :updated_at
