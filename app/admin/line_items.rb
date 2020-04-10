@@ -33,6 +33,7 @@ ActiveAdmin.register LineItem do
     column :created_at
     column :updated_at
     column :product_sku_id
+    column :product_sku
     column :payment_method
     column :order_id
     column :client_id
