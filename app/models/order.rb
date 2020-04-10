@@ -66,6 +66,7 @@ class Order < ApplicationRecord
            :amount_cents, :percentage, :list_of_clients, to: :coupon, prefix: true
   delegate :addresses, :email, :stripe_customer_id, to: :client, prefix: true, allow_nil: true
   delegate :empty?, to: :line_items
+  delegate :country, to: :delivery_address
 
   scope :order_by_date, -> { order(created_at: :desc) }
   scope :finished, lambda {
