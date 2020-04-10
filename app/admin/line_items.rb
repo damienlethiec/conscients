@@ -7,7 +7,47 @@ ActiveAdmin.register LineItem do
                 :tree_plantation_id, :quantity, :recipient_name, :recipient_message,
                 :certificate_date, :certificate_number, :delivery_email
 
-  includes :order, :tree_plantation, :product_sku
+  index do
+     column :id
+     column :product_sku
+     column :order
+     column :order_id
+     column :ttc_price_cents
+     column :ttc_price_currency
+     column :ht_price_cents
+     column :ht_price_currency
+     column :tree_plantation
+     column :quantity
+     column :recipient_name
+     column :recipient_message
+     column :certificate_date
+     column :certificate_number
+     column :delivery_email
+     column :created_at
+     column :updated_at
+     actions
+  end
+
+  csv do
+    column :id
+    column :product_sku_id
+    column :order_id
+    column :delivery_fees_cents
+    column :payment_method
+    column :country
+    column :ttc_price_cents
+    column :ttc_price_currency
+    column :ht_price_cents
+    column :ht_price_currency
+    column :tree_plantation_id
+    column :quantity
+    column :recipient_name
+    column :certificate_date
+    column :certificate_number
+    column :delivery_email
+    column :created_at
+    column :updated_at
+  end
 
   # Custom action --> Link + simili controller
   action_item :download_certificate, only: :show, if: proc { line_item.certificate.attached? } do
