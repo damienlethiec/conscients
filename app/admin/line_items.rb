@@ -30,23 +30,27 @@ ActiveAdmin.register LineItem do
 
   csv do
     column :id
+    column :created_at
+    column :updated_at
     column :product_sku_id
-    column :order_id
-    column :delivery_fees_cents
     column :payment_method
+    column :order_id
+    column :client_id
+    column :client_email do |line_item|
+      line_item.order.client.email
+    end
     column :country
-    column :ttc_price_cents
-    column :ttc_price_currency
+    column :quantity
     column :ht_price_cents
     column :ht_price_currency
+    column :ttc_price_cents
+    column :ttc_price_currency
+    column :delivery_fees_cents
     column :tree_plantation_id
-    column :quantity
     column :recipient_name
     column :certificate_date
     column :certificate_number
     column :delivery_email
-    column :created_at
-    column :updated_at
   end
 
   # Custom action --> Link + simili controller

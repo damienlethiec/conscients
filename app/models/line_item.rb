@@ -60,7 +60,7 @@ class LineItem < ApplicationRecord
            :certificate_background, :producer_latitude, :producer_longitude,
            to: :product_sku, allow_nil: true
   delegate :client_full_name, :paid?, :payment_method, :delivery_fees_cents,
-           :country, to: :order
+           :country, :client_id, to: :order
 
   delegate :color_certificate, to: :product_sku, allow_nil: true
   delegate :latitude, :longitude, :project_name, :project_type,
