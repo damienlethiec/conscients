@@ -40,7 +40,9 @@ ActiveAdmin.register LineItem do
     column :client_email do |line_item|
       line_item.order.client.email
     end
-    column :country
+    column :country do |line_item|
+      line_item.order&.delivery_address&.country
+    end
     column :quantity
     column :ht_price_cents
     column :ht_price_currency
