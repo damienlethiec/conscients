@@ -53,7 +53,7 @@ class Product < ApplicationRecord
   include FriendlyId
   friendly_id :name, use: %i[slugged mobility]
 
-  include PgSearch
+  include PgSearch::Model
   pg_search_scope :search_by_name,
                   against: %i[name_fr name_en],
                   using: { tsearch: { prefix: true } }
