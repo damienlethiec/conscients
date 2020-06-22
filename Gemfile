@@ -38,7 +38,7 @@ gem 'postmark-rails', '~> 0.16'
 
 gem 'activeadmin', '~> 1.4'
 # Thème for activeadmin
-gem 'arctic_admin', '~> 1.4'
+gem 'arctic_admin', '~> 3.2'
 # Search for active admin
 gem 'ransack', '~> 2.1', '>= 2.1.1'
 
