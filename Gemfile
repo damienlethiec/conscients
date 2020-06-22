@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'pg', '>= 0.18'
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 4.3'
 gem 'rails', '5.2.2'
 
 gem 'friendly_id-mobility', '~> 0.5'
@@ -17,7 +17,7 @@ gem 'webpacker', '~> 4.0.7'
 
 gem 'aws-sdk-s3', '~> 1.13', require: false
 gem 'jbuilder', '~> 2.5'
-gem 'mini_magick', '~> 4.9.1'
+gem 'mini_magick'#, '~> 4.9.1'
 gem 'redis', '~> 4.0'
 
 gem 'bootsnap', '~> 1.3', require: false
@@ -38,7 +38,7 @@ gem 'postmark-rails', '~> 0.16'
 
 gem 'activeadmin', '~> 1.4'
 # Thème for activeadmin
-gem 'arctic_admin', '~> 1.4'
+gem 'arctic_admin', '~> 3.2'
 # Search for active admin
 gem 'ransack', '~> 2.1', '>= 2.1.1'
 
@@ -65,7 +65,7 @@ gem 'wkhtmltopdf-heroku', '~> 2.12', '>= 2.12.4.0'
 
 gem 'country_select', '~> 3.1'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.4'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 6.0'
 
 gem 'invisible_captcha'
 
@@ -81,7 +81,11 @@ group :development, :test do
   gem 'pry-byebug', '~> 3.6'
   gem 'pry-rails', '~> 0.3'
   gem 'rspec-rails'
-  gem 'webdrivers', '~> 4.0'
+  gem 'webdrivers'
+  gem 'selenium-webdriver'
+  # gem 'factory_bot'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do
@@ -104,7 +108,8 @@ group :development do
 
   gem 'brakeman', '~> 4.2', require: false
   gem 'overcommit', '~> 0.52'
-  gem 'rubocop-rails', '2.4.0', require: false
+  gem 'ruby-graphviz'
+  gem 'rubocop-rails', require: false
 
   gem 'guard', '~> 2.14'
   gem 'guard-bundler', '~> 2.1', require: false
@@ -113,5 +118,4 @@ group :development do
 
   gem 'better_errors', '~> 2.4'
   gem 'binding_of_caller', '~> 0.8'
-  # gem 'web-console', '~> 3.6'
 end

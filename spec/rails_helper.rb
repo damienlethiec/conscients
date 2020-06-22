@@ -78,11 +78,22 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 end
 
-Capybara.register_driver :selenium_chrome do |app|
-  Capybara::Selenium::Driver.new(app, browser: :chrome)
+Capybara.server = :puma, { Silent: true }
+
+Capybara.register_driver :chrome_headless do |app|
+  options = ::Selenium::WebDriver::Chrome::Options.new
+
+  options.add_emulation(device_name: 'iPhone 5/SE') if ENV['MOBILE_TESTING'] # narrowest iphone
+
+  options.add_argument('--headless')
+  options.add_argument('--no-sandbox')
+  options.add_argument('--disable-dev-shm-usage')
+  options.add_argument('--window-size=1400,1400')
+
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
 
-Capybara.javascript_driver = :selenium_chrome
+Capybara.javascript_driver = :chrome_headless
 
 FactoryBot::SyntaxRunner.class_eval do
   include ActionDispatch::TestProcess

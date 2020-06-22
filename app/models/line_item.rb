@@ -60,7 +60,9 @@ class LineItem < ApplicationRecord
            :product_name, :product_ttc_price_cents, :product_ht_price_cents, :product_weight,
            :certificate_background, :producer_latitude, :producer_longitude, :color_certificate,
            to: :product_sku, allow_nil: true
-  delegate :client_full_name, :paid?, to: :order
+  delegate :client_full_name, :paid?, :payment_method, :delivery_fees_cents,
+           :client_id, to: :order
+
   delegate :latitude, :longitude, :project_name, :project_type,
            to: :tree_plantation, prefix: true, allow_nil: true
 
