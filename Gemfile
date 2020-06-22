@@ -79,6 +79,7 @@ group :development, :test do
   gem 'pry-byebug', '~> 3.6'
   gem 'pry-rails', '~> 0.3'
   gem 'rspec-rails'
+  gem 'webdrivers'
   gem 'selenium-webdriver'
   # gem 'factory_bot'
   gem 'factory_bot_rails'
@@ -115,5 +116,4 @@ group :development do
 
   gem 'better_errors', '~> 2.4'
   gem 'binding_of_caller', '~> 0.8'
-  gem 'web-console', '~> 3.6'
 end
