@@ -65,7 +65,7 @@ gem 'wkhtmltopdf-heroku', '~> 2.12', '>= 2.12.4.0'
 
 gem 'country_select', '~> 3.1'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.4'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 6.0'
 
 gem 'invisible_captcha'
 
