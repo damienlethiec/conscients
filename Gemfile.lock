@@ -496,7 +496,6 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     stripe (5.1.1)
-    table_print (1.5.6)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -603,7 +602,6 @@ DEPENDENCIES
   spring (~> 2.0)
   spring-watcher-listen (~> 2.0)
   stripe (~> 5.1.1)
-  table_print (~> 1.5)
   uglifier (~> 4.1)
   webdrivers
   webpacker (~> 4.0.7)

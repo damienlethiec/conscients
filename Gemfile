@@ -103,7 +103,6 @@ group :development do
   gem 'bullet', '~> 5.7'
   # Generate schéma of database automatically in erd.pdf
   gem 'rails-erd', '~> 1.5'
-  gem 'table_print', '~> 1.5'
 
   gem 'brakeman', '~> 4.2', require: false
   gem 'overcommit', '~> 0.52'
