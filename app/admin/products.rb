@@ -132,7 +132,8 @@ ActiveAdmin.register Product do
       f.input :tax_rate
       f.input :weight
       f.input :product_type
-      f.input :tree_plantations, as: :check_boxes, collection: TreePlantation.admin_select
+      f.input :tree_plantations, as: :check_boxes, collection: TreePlantation.admin_select if
+        f.object.tree? || f.object.personalized?
       f.input :seo_title_fr
       f.input :seo_title_en
       f.input :meta_description_fr
