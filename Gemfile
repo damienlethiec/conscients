@@ -104,7 +104,6 @@ group :development do
   # Generate schéma of database automatically in erd.pdf
   gem 'rails-erd', '~> 1.5'
   gem 'table_print', '~> 1.5'
-  gem 'xray-rails', '~> 0.3'
 
   gem 'brakeman', '~> 4.2', require: false
   gem 'overcommit', '~> 0.52'
