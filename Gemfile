@@ -59,7 +59,7 @@ gem 'stripe', '~> 5.1.1'
 
 gem 'kaminari', '~> 1.1'
 gem 'pg_search', '~> 2.1'
-gem 'wicked_pdf', '~> 1.1'
+gem 'wicked_pdf', '~> 2.1'
 gem 'wkhtmltopdf-binary', '~> 0.12'
 gem 'wkhtmltopdf-heroku', '~> 2.12', '>= 2.12.4.0'
 
@@ -103,8 +103,6 @@ group :development do
   gem 'bullet', '~> 5.7'
   # Generate schéma of database automatically in erd.pdf
   gem 'rails-erd', '~> 1.5'
-  gem 'table_print', '~> 1.5'
-  gem 'xray-rails', '~> 0.3'
 
   gem 'brakeman', '~> 4.2', require: false
   gem 'overcommit', '~> 0.52'

@@ -2,6 +2,7 @@
 <%= form_with url: stripe_success_payments_path,
               method: :post,
               data: {
+                remote: false,
                 target: 'payment.stripeChargeForm',
                 stripe_publishable_key: Rails.application.credentials.dig(Rails.env.to_sym, :stripe_publishable_key),
                 locale: I18n.locale
