@@ -59,7 +59,7 @@ gem 'stripe', '~> 5.1.1'
 
 gem 'kaminari', '~> 1.1'
 gem 'pg_search', '~> 2.1'
-gem 'wicked_pdf', '~> 1.1'
+gem 'wicked_pdf', '~> 2.1'
 gem 'wkhtmltopdf-binary', '~> 0.12'
 gem 'wkhtmltopdf-heroku', '~> 2.12', '>= 2.12.4.0'
 

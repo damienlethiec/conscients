@@ -520,7 +520,7 @@ GEM
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    wicked_pdf (1.4.0)
+    wicked_pdf (2.1.0)
       activesupport
     wkhtmltopdf-binary (0.12.5.4)
     wkhtmltopdf-heroku (2.12.5.0)
@@ -605,7 +605,7 @@ DEPENDENCIES
   uglifier (~> 4.1)
   webdrivers
   webpacker (~> 4.0.7)
-  wicked_pdf (~> 1.1)
+  wicked_pdf (~> 2.1)
   wkhtmltopdf-binary (~> 0.12)
   wkhtmltopdf-heroku (~> 2.12, >= 2.12.4.0)
 
