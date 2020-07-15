@@ -185,8 +185,8 @@ class Order < ApplicationRecord
   end
 
   def total_weight
-    if line_items.includes(:product_sku).map(&:product_sku).compact.present?
-      line_items.includes(:product_sku).map(&:shipping_weight).sum || 0
+    if line_items.any?(&:product_sku)
+      line_items.sum(&:shipping_weight) || 0
     else
       0
     end
