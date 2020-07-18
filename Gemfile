@@ -17,7 +17,7 @@ gem 'webpacker', '~> 4.0.7'
 
 gem 'aws-sdk-s3', '~> 1.13', require: false
 gem 'jbuilder', '~> 2.5'
-gem 'mini_magick', '~> 4.9'
+gem 'mini_magick'#, '~> 4.9.1'
 gem 'redis', '~> 4.0'
 
 gem 'bootsnap', '~> 1.3', require: false
@@ -29,7 +29,7 @@ gem 'sidekiq-failures', '~> 1.0'
 
 # Analytics for rails --> https://github.com/ankane/ahoy
 gem 'ahoy_matey', '~> 2.0'
-gem 'devise', '~> 4.7'
+gem 'devise', '~> 4.7.1'
 gem 'devise-i18n', '~> 1.6'
 gem 'devise_invitable', '~> 1.7', '>= 1.7.5'
 gem 'gibbon', '~> 3.2'
@@ -59,13 +59,13 @@ gem 'stripe', '~> 5.1.1'
 
 gem 'kaminari', '~> 1.1'
 gem 'pg_search', '~> 2.1'
-gem 'wicked_pdf', '~> 1.1'
+gem 'wicked_pdf', '~> 2.1'
 gem 'wkhtmltopdf-binary', '~> 0.12'
 gem 'wkhtmltopdf-heroku', '~> 2.12', '>= 2.12.4.0'
 
 gem 'country_select', '~> 3.1'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.4'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 6.0'
 
 gem 'invisible_captcha'
 
@@ -76,9 +76,12 @@ gem 'pretender' # login as any user
 group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'factory_bot_rails'
+  gem 'faker'
   gem 'pry-byebug', '~> 3.6'
   gem 'pry-rails', '~> 0.3'
   gem 'rspec-rails'
+  gem 'webdrivers'
   gem 'selenium-webdriver'
   # gem 'factory_bot'
   gem 'factory_bot_rails'
@@ -100,11 +103,9 @@ group :development do
   gem 'bullet', '~> 5.7'
   # Generate schéma of database automatically in erd.pdf
   gem 'rails-erd', '~> 1.5'
-  gem 'table_print', '~> 1.5'
-  gem 'xray-rails', '~> 0.3'
 
   gem 'brakeman', '~> 4.2', require: false
-  gem 'overcommit', '~> 0.44'
+  gem 'overcommit', '~> 0.52'
   gem 'ruby-graphviz'
   gem 'rubocop-rails', require: false
 
@@ -115,5 +116,4 @@ group :development do
 
   gem 'better_errors', '~> 2.4'
   gem 'binding_of_caller', '~> 0.8'
-  gem 'web-console', '~> 3.6'
 end

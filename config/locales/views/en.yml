@@ -187,10 +187,10 @@ en:
       variant: "Age"
       back_to_everything: "All the ages"
     added_to_cart_modal:
-      tree_added_with_recipient: "A tree for %{recipient} has been added to your cart."
-      tree_added: "A tree has been added to your cart."
-      product_added: "Product added to your cart."
-      product_added_with_recipient: "A product for %{recipient} has been added to your cart."
+      tree_added_with_recipient: "%{count} tree(s) for %{recipient} added to your cart."
+      tree_added: "%{count} tree(s) added to your cart."
+      product_added_with_recipient: "%{count} product(s) for %{recipient} added to your cart."
+      product_added: "%{count} product(s) added to your cart."
       go_to_cart: "Go to my cart"
       plant_more_trees: "Plant more trees !"
       continue_purchases: "Continue my purchases"
@@ -251,6 +251,7 @@ en:
       delivered_to: Delivered to
     impact:
       my_plantations: My plantations
+      documentation: Documentation
       trees_planted_amount: "%{quantity} trees planted"
       trees_planted: "trees planted"
       trees_specie_planted: Specie planted
@@ -463,7 +464,7 @@ en:
         title: "Client account"
         sign_up: "Create your account"
         already_sign_up: "Already registered?"
-        sign_in: "Connect"
+        sign_in: "Login"
         subscribe_to_newsletter: "Subscribe to newsletter"
         password: "Choose a password"
         email: "Your email"
@@ -475,7 +476,7 @@ en:
       b2b: "B2B"
       my_cart: "My cart"
       search: "Search"
-      sign_in: "Connect"
+      sign_in: "Login"
       blog: "News"
       sign_out: "Sign out"
       forgot_your_password: "Forgot your password?"

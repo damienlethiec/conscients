@@ -4,9 +4,9 @@ function refreshForm(innerHTML) {
 }
 
 <% if @line_item.errors.any? %>
-  refreshForm('<%= j render "products/add_to_cart_form", product: @product, line_item: @line_item %>');
+  refreshForm('<%= j render "products/add_to_cart_form", product: @product, line_item: @line_item, count: @quantity %>');
 <% else %>
-  refreshForm('<%= j render "products/add_to_cart_form", product: @product, line_item: LineItem.new %>');
+  refreshForm('<%= j render "products/add_to_cart_form", product: @product, line_item: LineItem.new, count: @quantity %>');
   launchModal('#added_to_cart_modal');
 <% end %>
 launchFlatpickr("#datepicker");

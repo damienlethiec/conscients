@@ -190,7 +190,7 @@ ActiveRecord::Schema.define(version: 2019_09_14_194237) do
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.boolean "can_debug", default: false, null: false
-    t.string "session_token", default: "1a4bc6334eeb20a7f7636beea93c3ddb"
+    t.string "session_token", default: "3a3f286bca8e58c0a369556b3c362bba"
     t.index ["email"], name: "index_clients_on_email", unique: true
     t.index ["invitation_token"], name: "index_clients_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_clients_on_invitations_count"

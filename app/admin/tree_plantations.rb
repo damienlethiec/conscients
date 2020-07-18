@@ -5,9 +5,12 @@ ActiveAdmin.register TreePlantation do
 
   permit_params :project_name, :project_type_fr, :project_type_en, :partner, :plantation_uuid,
                 :base_certificate_uuid, :latitude, :longitude, :is_full,
-                :tree_specie, :producer_name, :trees_quantity, :klm_file
+                :tree_specie, :producer_name, :trees_quantity, :klm_file,
+                :producer_presentation, :project_presentation
 
   includes :klm_file_attachment
+  includes :producer_presentation_attachment
+  includes :project_presentation_attachment
 
   index do
     selectable_column
@@ -25,6 +28,12 @@ ActiveAdmin.register TreePlantation do
     column :trees_quantity
     column :klm_file do |tree_plantation|
       I18n.t('active_admin.attachement_uploaded') if tree_plantation.klm_file.attached?
+    end
+    column :producer_presentation do |tree_plantation|
+      I18n.t('active_admin.attachement_uploaded') if tree_plantation.producer_presentation.attached?
+    end
+    column :project_presentation do |tree_plantation|
+      I18n.t('active_admin.attachement_uploaded') if tree_plantation.project_presentation.attached?
     end
     column :created_at
     column :updated_at
@@ -47,6 +56,10 @@ ActiveAdmin.register TreePlantation do
       f.input :trees_quantity
       f.input :klm_file, as: :file,
         hint: tree_plantation.klm_file.attached? && I18n.t('active_admin.attachement_uploaded')
+      f.input :producer_presentation, as: :file,
+        hint: tree_plantation.producer_presentation.attached? && I18n.t('active_admin.attachement_uploaded')
+      f.input :project_presentation, as: :file,
+        hint: tree_plantation.project_presentation.attached? && I18n.t('active_admin.attachement_uploaded')
       if f.object.is_full
         f.input :is_full, as: :boolean, label: simple_format(I18n.t('active_admin.is_full_change'))
       end
@@ -70,6 +83,16 @@ ActiveAdmin.register TreePlantation do
       row :trees_quantity
       row :klm_file do |tree_plantation|
         I18n.t('active_admin.attachement_uploaded') if tree_plantation.klm_file.attached?
+      end
+      row :producer_presentation do |tree_plantation|
+        if tree_plantation.producer_presentation.attached?
+          I18n.t('active_admin.attachement_uploaded')
+        end
+      end
+      row :project_presentation do |tree_plantation|
+        if tree_plantation.project_presentation.attached?
+          I18n.t('active_admin.attachement_uploaded')
+        end
       end
       row :created_at
       row :updated_at

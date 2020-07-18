@@ -27,6 +27,7 @@ class ProductSku < ApplicationRecord
 
   before_validation :normalize_sku, only: :create
   before_update :alert_on_zero_quantity
+  before_save :nullify_qtty_if_tree
 
   validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :sku, presence: true, uniqueness: true, length: { minimum: 3 }
@@ -38,6 +39,9 @@ class ProductSku < ApplicationRecord
 
   default_scope { includes(:product, :variant) }
   scope :in_stock, -> { where('quantity > ?', 0) }
+  scope :tree, -> { joins(:product).where(products: { product_type: 'tree' }) }
+  scope :classic, -> { joins(:product).where(products: { product_type: 'classic' }) }
+  scope :personalized, -> { joins(:product).where(products: { product_type: 'personalized' }) }
 
   def to_s
     variant ? "#{product_name} / #{variant.value}" : product_name
@@ -49,7 +53,7 @@ class ProductSku < ApplicationRecord
 
   # rubocop:disable Metrics/AbcSize
   def alert_on_zero_quantity
-    return unless quantity != quantity_was && quantity_was.positive? && quantity.zero?
+    return unless quantity != quantity_was && quantity_was.positive? && quantity.zero? && !tree?
 
     ContactMailer.with(
       subject: "Stock alert SKU: #{sku} - product: #{product.name}",
@@ -57,4 +61,9 @@ class ProductSku < ApplicationRecord
     ).stock_alert.deliver_later
   end
   # rubocop:enable Metrics/AbcSize
+
+  def nullify_qtty_if_tree
+    # tree_plantations hold the quantity for Product.tree?
+    self.quantity = 0 if tree?
+  end
 end

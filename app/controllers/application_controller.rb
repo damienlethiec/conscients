@@ -26,12 +26,15 @@ class ApplicationController < ActionController::Base
     redirect_to request.referer || root_path
   end
 
-  # rubocop:disable Lint/RequireParentheses
   def set_locale
-    locale = params.fetch(:locale, I18n.default_locale).to_sym
-    I18n.locale = I18n.exists? locale || I18n.default_locale
+    return I18n.default_locale if params[:locale].present? && !locale_exists?
+
+    I18n.locale = params.fetch(:locale, I18n.default_locale).to_sym
   end
-  # rubocop:enable Lint/RequireParentheses
+
+  def locale_exists?
+    I18n.available_locales.include?(params[:locale].to_sym)
+  end
 
   def default_url_options
     { locale: I18n.locale == I18n.default_locale ? nil : I18n.locale }
@@ -83,6 +86,7 @@ class ApplicationController < ActionController::Base
     id = @cart.payment_intent_id
     @cart.update payment_intent_id: nil
     Stripe::PaymentIntent.cancel id
-  rescue Stripe::InvalidRequestError
+  rescue Stripe::InvalidRequestError => e
+    Rails.logger.error e
   end
 end

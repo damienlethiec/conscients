@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProfilesController < ApplicationController
-  before_action :redirect_if_unsigned
+  before_action :authenticate_client!
 
   def edit; end
 end

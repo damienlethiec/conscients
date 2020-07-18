@@ -12,8 +12,8 @@ class AddItemToCart
 
   def perform
     find_or_initialize_line_item
-    add_attributes_certicable_line_item if @line_item.tree?
     update_quantity_line_item
+    add_attributes_certicable_line_item if @line_item.tree? || @line_item.personalized?
     @line_item
   end
 
@@ -24,6 +24,8 @@ class AddItemToCart
   end
 
   def add_attributes_certicable_line_item
+    return unless plantation_with_stock
+
     set_tree_plantation
     add_plantation_attributes_to_line_item
   end
@@ -34,7 +36,11 @@ class AddItemToCart
   end
 
   def set_tree_plantation
-    @tree_plantation = TreePlantation.first_with_needed_quantity(@quantity)
+    @tree_plantation = plantation_with_stock
+  end
+
+  def plantation_with_stock
+    @line_item.plantation_with_stock
   end
 
   def add_plantation_attributes_to_line_item

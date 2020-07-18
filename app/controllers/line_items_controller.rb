@@ -16,7 +16,9 @@ class LineItemsController < ApplicationController
 
   # Line item already in the cart but we update it (especially quantity)
   def update
-    flash[:alert] = 'Stock trop faible' unless @line_item.update(line_item_params_update)
+    unless @line_item.update(line_item_params_update)
+      flash[:alert] = @line_item.errors.full_messages.to_sentence
+    end
     redirect_to cart_path(@cart)
   end
 
@@ -51,7 +53,7 @@ class LineItemsController < ApplicationController
   end
 
   def quantity
-    params.dig(:line_item, :quantity)
+    @quantity = params.dig(:line_item, :quantity)
   end
 
   def line_item_params

@@ -3,10 +3,6 @@ require: rubocop-rails
 Rails:
   Enabled: true
 
-Metrics/LineLength:
-  Max: 100
-  Exclude:
-    - config/routes.rb
 
 AllCops:
   Exclude:
@@ -69,6 +65,15 @@ Lint/SuppressedException:
 Layout/HashAlignment:
   Enabled: False
 
+Metrics/LineLength:
+  Max: 100
+  Exclude:
+    - config/routes.rb
+    - spec/models/*.rb
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: False
+
 Style/AsciiComments:
   Enabled: False
 
@@ -101,3 +106,12 @@ Rails/UnknownEnv:
 
 Style/FormatStringToken:
   Enabled: False
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true

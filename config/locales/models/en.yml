@@ -54,6 +54,8 @@ en:
         amount_currency: "Currency of the discount"
         amount_min_order_cents: "Minimum amount of the order"
         amount_min_order_currency: "Currency of the minimum of the order"
+      line_item:
+        quantity: ""
       order:
         aasm_state: "State of the order"
         aasm_state/in_cart: "Cart"
@@ -73,7 +75,20 @@ en:
           paypal: "Paypal"
           bank_tranfer: "Bank Transfer"
       tree_plantation:
+        project_name: Project name
+        project_type: Project type
+        project_type_fr: Project type FR
+        project_type_en: Project type EN
+        plantation_uuid: Plantation identifier
+        base_certificate_uuid: Plantation identifier base
+        latitude: Latitude
+        longitude: Longitude
+        tree_specie: Tree specie
+        producer_name: Producer name
         trees_quantity: "Available tree quantity"
+        klm_file: Klm file
+        producer_presentation: Project presentation
+        project_presentation: Producer presentation
       line_item:
         quantity: "Quantity in stock"
       ahoy/event:
@@ -86,6 +101,10 @@ en:
           attributes:
             quantity:
               greater_than_or_equal_to: "in stock too limited"
+        line_item:
+          attributes:
+            quantity:
+              insufficient_stock: 'Only %{count} tree(s) left in this plantation'
         tree_plantation:
           attributes:
             trees_quantity:

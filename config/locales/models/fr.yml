@@ -180,7 +180,7 @@ fr:
         product_sku: "UGS produit"
         order: "Commande"
         tree_plantation: "Plantation d'arbres"
-        quantity: "Quantité"
+        quantity: ""
         recipient_name: "Attribué à"
         recipient_message: "Message"
         certificate_date: "Date du certificat"
@@ -232,6 +232,9 @@ fr:
         tree_specie: "Espèce d'arbre"
         producer_name: "Nom du producteur"
         trees_quantity: "Quantité d'arbres disponibles"
+        klm_file: Fichier klm
+        producer_presentation: Présentation du projet
+        project_presentation: Présentation du producteur
       ahoy/event:
         visit: "Visite"
         user: "Utilisateur"
@@ -262,6 +265,10 @@ fr:
           attributes:
             quantity:
               greater_than_or_equal_to: "en stock trop faible"
+        line_item:
+          attributes:
+            quantity:
+              insufficient_stock: 'Il ne reste que %{count} arbre(s) dans cette parcelle'
         tree_plantation:
           attributes:
             trees_quantity:

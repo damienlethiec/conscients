@@ -187,10 +187,10 @@ fr:
       variant: "Age"
       back_to_everything: "Tous les âges"
     added_to_cart_modal:
-      tree_added_with_recipient: "Un arbre pour %{recipient} a été ajouté au panier."
-      product_added_with_recipient: "Un produit pour %{recipient} a été ajouté au panier."
-      tree_added: "Un arbre a été ajouté au panier."
-      product_added: "Produit ajouté au panier."
+      tree_added_with_recipient: "%{count} arbre(s) pour %{recipient} ajouté(s) au panier."
+      tree_added: "%{count} arbre(s) ajouté(s) au panier."
+      product_added_with_recipient: "%{count} produit(s) pour %{recipient} ajouté(s) au panier."
+      product_added: "%{count} produit(s) ajouté(s) au panier."
       go_to_cart: "Valider mon panier"
       plant_more_trees: "Planter d'autres arbres !"
       continue_purchases: "Poursuivre mes achats"
@@ -252,6 +252,7 @@ fr:
       delivered_to: Livré à
     impact:
       my_plantations: Mes plantations
+      documentation: Documentation
       trees_planted_amount: "%{quantity} arbres plantés"
       trees_planted: "arbres plantés"
       trees_specie_planted: Espèce plantée
