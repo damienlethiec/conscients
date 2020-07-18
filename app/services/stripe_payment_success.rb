@@ -11,7 +11,7 @@ class StripePaymentSuccess
   end
 
   def call
-    return unless paid?
+    return unless in_cart?
 
     @cart.stripe!
     @cart.update(payment_details: charge)

@@ -55,10 +55,10 @@ class LineItem < ApplicationRecord
   after_create :set_cart_to_correct_delivery_type
   after_destroy :set_cart_to_correct_delivery_type
 
-  delegate :classic?, :personalized?, :tree?, :product, :product_images,
-           :product_name, :product_ttc_price_cents, :product_ht_price_cents, :product_weight,
-           :certificate_background, :producer_latitude, :producer_longitude, :color_certificate,
-           to: :product_sku, allow_nil: true
+  delegate :classic?, :personalized?, :tree?, :tree_or_personalized?, :product,
+           :product_images, :product_name, :product_ttc_price_cents, :product_ht_price_cents,
+           :product_weight, :certificate_background, :producer_latitude, :producer_longitude,
+           :color_certificate, to: :product_sku, allow_nil: true
   delegate :client_full_name, :paid?, :payment_method, :delivery_fees_cents,
            :client_id, to: :order
 
@@ -182,16 +182,15 @@ class LineItem < ApplicationRecord
   end
 
   def decrement_stock_quantities
-    product_sku.decrement(:quantity, added_quantity) unless tree?
-    tree_plantation.decrement(:quantity, added_quantity) if (tree? && tree_plantation) ||
-      (personalized? && tree_plantation)
+    product_sku.decrement(:quantity, added_quantity)     unless tree_or_personalized?
+    tree_plantation.decrement(:quantity, added_quantity) if tree_or_personalized?
   end
 
   def increment_stock_quantities_destroy
-    product_sku&.increment(:quantity, quantity) unless tree?
-    product_sku&.save unless tree?
-    tree_plantation&.increment(:quantity, quantity) if tree? || personalized?
-    tree_plantation&.save if tree? || personalized?
+    product_sku&.increment(:quantity, quantity)     unless tree_or_personalized?
+    product_sku&.save                               unless tree_or_personalized?
+    tree_plantation&.increment(:quantity, quantity) if tree_or_personalized?
+    tree_plantation&.save                           if tree_or_personalized?
   end
 
   def set_cart_to_correct_delivery_type
