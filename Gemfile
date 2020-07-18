@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'pg', '>= 0.18'
 gem 'puma', '~> 4.3'
-gem 'rails', '5.2.2'
+gem 'rails', '~> 5.2'
 
 gem 'friendly_id-mobility', '~> 0.5'
 # Content translation (like Globalize but much better) --> https://github.com/shioyama/mobility
