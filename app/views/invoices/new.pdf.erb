@@ -9,34 +9,36 @@
     </table>
   </div>
 
-  <div class="invoice-top-under">
-    <table>
-      <tr>
-        <td>
-        <span class="bold"><%= t('.billing_address') %></span> <br>
-          <% if @billing_address.email %>
-            <span><%= @billing_address.email %></span>
-          <% else %>
-            <span><%= @billing_address.first_name %> <%= @billing_address.last_name %></span>
-            <% if @billing_address.company %>
-              <span><%= @billing_address.company %></span>
+  <% if @billing_address %>
+    <div class="invoice-top-under">
+      <table>
+        <tr>
+          <td>
+          <span class="bold"><%= t('.billing_address') %></span> <br>
+            <% if @billing_address.email %>
+              <span><%= @billing_address.email %></span>
+            <% else %>
+              <span><%= @billing_address.first_name %> <%= @billing_address.last_name %></span>
+              <% if @billing_address.company %>
+                <span><%= @billing_address.company %></span>
+              <% end %>
+              <% if @billing_address.address_1 %>
+                <span><%= @billing_address.address_1 %></span>
+              <% end %>
+              <% if @billing_address.address_2 %>
+                <span><%= @billing_address.address_2 %></span>
+              <% end %>
+              <span><%= @billing_address.city %> <%= @billing_address.zip_code %></span>
+              <% if @billing_address.country %>
+                <span><%= @billing_address.country %></span>
+              <% end %>
             <% end %>
-            <% if @billing_address.address_1 %>
-              <span><%= @billing_address.address_1 %></span>
-            <% end %>
-            <% if @billing_address.address_2 %>
-              <span><%= @billing_address.address_2 %></span>
-            <% end %>
-            <span><%= @billing_address.city %> <%= @billing_address.zip_code %></span>
-            <% if @billing_address.country %>
-              <span><%= @billing_address.country %></span>
-            <% end %>
-          <% end %>
-        </td>
-        <td class="align-right"><h2><%= t('.order') %> #<%= @order.id %><br> <%= I18n.l(@order.payment_date, format: :long_no_time).titleize %></h2></td>
-      </tr>
-    </table>
-  </div>
+          </td>
+          <td class="align-right"><h2><%= t('.order') %> #<%= @order.id %><br> <%= I18n.l(@order.payment_date, format: :long_no_time).titleize %></h2></td>
+        </tr>
+      </table>
+    </div>
+  <% end %>
 
   <table class="mb-20">
     <thead class="bold">
