@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'pg', '>= 0.18'
 gem 'puma', '~> 4.3'
-gem 'rails', '5.2.2'
+gem 'rails', '~> 5.2'
 
 gem 'friendly_id-mobility', '~> 0.5'
 # Content translation (like Globalize but much better) --> https://github.com/shioyama/mobility
@@ -60,8 +60,12 @@ gem 'stripe', '~> 5.1.1'
 gem 'kaminari', '~> 1.1'
 gem 'pg_search', '~> 2.1'
 gem 'wicked_pdf', '~> 2.1'
-gem 'wkhtmltopdf-binary', '~> 0.12'
-gem 'wkhtmltopdf-heroku', '~> 2.12', '>= 2.12.4.0'
+group :development, :test do
+  gem 'wkhtmltopdf-binary', '~> 0.12'
+end
+group :production do
+  gem 'wkhtmltopdf-heroku', '~> 2.12', '>= 2.12.4.0'
+end
 
 gem 'country_select', '~> 3.1'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.4'

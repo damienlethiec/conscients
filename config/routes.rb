@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # noise
+  # https://rollbar.com/conscients/conscients/items/53/
+  match '/', to: 'pages#home', via: :options
+  match '/shop/cart.php', to: 'pages#home', via: :options
+
   respond200 = ['wp-login.php']
   respond200.each do |r2|
     get "/#{r2}", to: proc { [200, {}, ['']] }
