@@ -183,7 +183,7 @@ class LineItem < ApplicationRecord
 
   def decrement_stock_quantities
     product_sku.decrement(:quantity, added_quantity)     unless tree_or_personalized?
-    tree_plantation.decrement(:quantity, added_quantity) if tree_or_personalized?
+    tree_plantation&.decrement(:quantity, added_quantity) if tree_or_personalized?
   end
 
   def increment_stock_quantities_destroy

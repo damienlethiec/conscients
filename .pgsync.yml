@@ -37,6 +37,7 @@ groups:
     - mobility_string_translations
     - mobility_text_translations
     - stock_entries
+    - product_tree_plantations
   # user:
   #   users: "WHERE id = {1}"
   #   orders: "WHERE user_id = {1}"

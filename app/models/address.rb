@@ -48,4 +48,8 @@ class Address < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def email
+    super || client.email
+  end
 end
