@@ -160,15 +160,15 @@ class LineItem < ApplicationRecord
            &.reorder(trees_quantity: :desc)&.first
   end
 
+  def tree_or_personalized?
+    tree? || personalized?
+  end
+
   private
 
   def plantation_with_largest_stock
     product.tree_plantations.where('tree_plantations.trees_quantity >= 0')
            &.reorder(trees_quantity: :desc)&.first
-  end
-
-  def tree_or_personalized?
-    tree? || personalized?
   end
 
   def url_certificate
