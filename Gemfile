@@ -63,7 +63,7 @@ gem 'wicked_pdf', '~> 2.1'
 group :development, :test do
   gem 'wkhtmltopdf-binary', '~> 0.12'
 end
-group :production do
+group :production, :staging do
   gem 'wkhtmltopdf-heroku', '~> 2.12', '>= 2.12.4.0'
 end
 
