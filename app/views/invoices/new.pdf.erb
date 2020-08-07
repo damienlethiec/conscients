@@ -15,24 +15,7 @@
         <tr>
           <td>
           <span class="bold"><%= t('.billing_address') %></span> <br>
-            <% if @billing_address.email %>
-              <span><%= @billing_address.email %></span>
-            <% else %>
-              <span><%= @billing_address.first_name %> <%= @billing_address.last_name %></span>
-              <% if @billing_address.company %>
-                <span><%= @billing_address.company %></span>
-              <% end %>
-              <% if @billing_address.address_1 %>
-                <span><%= @billing_address.address_1 %></span>
-              <% end %>
-              <% if @billing_address.address_2 %>
-                <span><%= @billing_address.address_2 %></span>
-              <% end %>
-              <span><%= @billing_address.city %> <%= @billing_address.zip_code %></span>
-              <% if @billing_address.country %>
-                <span><%= @billing_address.country %></span>
-              <% end %>
-            <% end %>
+            <%= render 'invoices/address', address: @billing_address %>
           </td>
           <td class="align-right"><h2><%= t('.order') %> #<%= @order.id %><br> <%= I18n.l(@order.payment_date, format: :long_no_time).titleize %></h2></td>
         </tr>
@@ -92,24 +75,7 @@
 
   <div class="invoice-bottom">
     <h4 class="delivered-to"><%= t('.delivered_to') %></h4>
-    <% if @delivery_address.email %>
-      <span><%= @delivery_address.email %></span>
-    <% else %>
-      <span><%= @delivery_address.first_name %> <%= @delivery_address.last_name %></span>
-      <% if @delivery_address.company %>
-        <span><%= @delivery_address.company %></span>
-      <% end %>
-      <% if @delivery_address.address_1 %>
-        <span><%= @delivery_address.address_1 %></span>
-      <% end %>
-      <% if @delivery_address.address_2 %>
-        <span><%= @delivery_address.address_2 %></span>
-      <% end %>
-      <span><%= @delivery_address.city %> <%= @delivery_address.zip_code %></span>
-      <% if @delivery_address.country %>
-        <span><%= @delivery_address.country %></span>
-      <% end %>
-    <% end %>
+    <%= render 'invoices/address', address: @delivery_address %>
   </div>
 
 </div>
