@@ -42,7 +42,7 @@ class Address < ApplicationRecord
             presence: true, allow_blank: false, if: :postal?
 
   def to_s
-    "#{address_1} #{zip_code} #{city}"
+    "#{full_name} - #{address_1} #{zip_code} #{city}"
   end
 
   def full_name
