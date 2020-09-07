@@ -54,7 +54,7 @@ gem 'responders', '~> 2.4'
 
 gem 'aasm', '~> 4.12'
 gem 'money-rails', '~> 1.11'
-gem 'paypal-sdk-rest'
+gem 'paypal-checkout-sdk'
 gem 'stripe', '~> 5.1.1'
 
 gem 'kaminari', '~> 1.1'
