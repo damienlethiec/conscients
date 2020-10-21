@@ -21,6 +21,7 @@ class Paypal::Order::Capture < Paypal::Order::Base
   end
 
   private
+
   def request
     PayPalCheckoutSdk::Orders::OrdersCaptureRequest::new(@order_id)
   end
