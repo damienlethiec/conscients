@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
 
   def track_action
     ahoy.track('Action',
-      request.path_parameters.each{ |k,v| v.gsub!('\\u0000', '') }
+      request.path_parameters.dup.each{ |k,v| v.gsub!('\\u0000', '') }
     )
   end
 
