@@ -327,9 +327,9 @@ GEM
     parallel (1.19.1)
     parser (2.7.0.4)
       ast (~> 2.4.0)
-    paypal-sdk-rest (1.7.4)
-      multi_json (~> 1.0)
-      xml-simple
+    paypal-checkout-sdk (1.0.3)
+      paypalhttp (~> 1.0.0)
+    paypalhttp (1.0.0)
     pg (1.2.2)
     pg_search (2.3.2)
       activerecord (>= 5.2)
@@ -524,7 +524,6 @@ GEM
       activesupport
     wkhtmltopdf-binary (0.12.5.4)
     wkhtmltopdf-heroku (2.12.5.0)
-    xml-simple (1.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -575,7 +574,7 @@ DEPENDENCIES
   oj (~> 3.5)
   omniauth-facebook (~> 5.0)
   overcommit (~> 0.52)
-  paypal-sdk-rest
+  paypal-checkout-sdk
   pg (>= 0.18)
   pg_search (~> 2.1)
   pgsync

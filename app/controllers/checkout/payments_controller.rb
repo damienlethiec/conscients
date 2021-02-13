@@ -18,9 +18,10 @@ class Checkout::PaymentsController < ApplicationController
   end
 
   def create_paypal
-    redirect_url = CreatePaypalPayment.new(@cart).perform_creation
+    redirect_url = Paypal::Order::Create.call(@cart)
     redirect_to redirect_url
-  rescue PayPalError
+  rescue PayPalHttp::HttpError => e
+    # { status_code: e.status_code, debug_id: e.headers["debug_id"] }
     redirect_to new_payment_path, alert: t('flash.payments.create.alert')
   end
 
@@ -34,7 +35,7 @@ class Checkout::PaymentsController < ApplicationController
   end
 
   def paypal_success
-    CreatePaypalPayment.new(@cart, params).perform_execution
+    Paypal::Order::Capture.call(@cart)
     redirect_to payment_path(@cart), notice: t('flash.payments.create.notice')
   rescue PayPalError
     redirect_to new_payment_path, alert: t('flash.payments.create.alert')
