@@ -3,63 +3,63 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'pg', '>= 0.18'
-gem 'puma', '~> 4.3'
+gem 'pg'
+gem 'puma'
 gem 'rails', '~> 5.2'
 
-gem 'friendly_id-mobility', '~> 0.5'
+gem 'friendly_id-mobility'
 # Content translation (like Globalize but much better) --> https://github.com/shioyama/mobility
-gem 'mobility', '~> 0.5'
-gem 'rails-i18n', '~> 5.1'
+gem 'mobility'
+gem 'rails-i18n'
 
-gem 'uglifier', '~> 4.1'
-gem 'webpacker', '~> 4.0.7'
+gem 'uglifier'
+gem 'webpacker'
 
 gem 'aws-sdk-s3', '~> 1.13', require: false
-gem 'jbuilder', '~> 2.5'
-gem 'mini_magick'#, '~> 4.9.1'
-gem 'redis', '~> 4.0'
+gem 'jbuilder'
+gem 'mini_magick'
+gem 'redis'
 
-gem 'bootsnap', '~> 1.3', require: false
-gem 'oj', '~> 3.5'
-gem 'rollbar', '~> 2.15'
+gem 'bootsnap', require: false
+gem 'oj'
+gem 'rollbar'
 
-gem 'sidekiq', '~> 5.1'
-gem 'sidekiq-failures', '~> 1.0'
+gem 'sidekiq'
+gem 'sidekiq-failures'
 
 # Analytics for rails --> https://github.com/ankane/ahoy
-gem 'ahoy_matey', '~> 2.0'
-gem 'devise', '~> 4.7.1'
-gem 'devise-i18n', '~> 1.6'
-gem 'devise_invitable', '~> 1.7', '>= 1.7.5'
-gem 'gibbon', '~> 3.2'
+gem 'ahoy_matey'
+gem 'devise'
+gem 'devise-i18n'
+gem 'devise_invitable'
+gem 'gibbon'
 gem 'omniauth-facebook', '~> 5.0'
-gem 'postmark-rails', '~> 0.16'
+gem 'postmark-rails'
 
-gem 'activeadmin', '~> 1.4'
+gem 'activeadmin'
 # Thème for activeadmin
-gem 'arctic_admin', '~> 3.2'
+gem 'arctic_admin'
 # Search for active admin
-gem 'ransack', '~> 2.1', '>= 2.1.1'
+gem 'ransack'
 
-gem 'acts_as_list', '~> 0.9'
+gem 'acts_as_list'
 # Tree structure for models (categories in our case) --> https://github.com/stefankroes/ancestry
-gem 'ancestry', '~> 3.0'
-gem 'friendly_id', '~> 5.2'
+gem 'ancestry'
+gem 'friendly_id'
 # Static pages
-gem 'high_voltage', '~> 3.0'
-gem 'meta-tags', '~> 2.9'
+gem 'high_voltage'
+gem 'meta-tags'
 # Clean respond with in controllers
-gem 'responders', '~> 2.4'
+gem 'responders'
 
-gem 'aasm', '~> 4.12'
-gem 'money-rails', '~> 1.11'
+gem 'aasm'
+gem 'money-rails'
 gem 'paypal-sdk-rest'
-gem 'stripe', '~> 5.1.1'
+gem 'stripe'
 
-gem 'kaminari', '~> 1.1'
-gem 'pg_search', '~> 2.1'
-gem 'wicked_pdf', '~> 2.1'
+gem 'kaminari'
+gem 'pg_search'
+gem 'wicked_pdf'
 group :development, :test do
   gem 'wkhtmltopdf-binary', '~> 0.12'
 end
@@ -67,9 +67,9 @@ group :production, :staging do
   gem 'wkhtmltopdf-heroku', '~> 2.12', '>= 2.12.4.0'
 end
 
-gem 'country_select', '~> 3.1'
-gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.4'
-gem 'sass-rails', '~> 6.0'
+gem 'country_select'
+gem 'font-awesome-rails'
+gem 'sass-rails'
 
 gem 'invisible_captcha'
 
@@ -82,8 +82,8 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'pry-byebug', '~> 3.6'
-  gem 'pry-rails', '~> 0.3'
+  gem 'pry-byebug'
+  gem 'pry-rails'
   gem 'rspec-rails'
   gem 'webdrivers'
   gem 'selenium-webdriver'
@@ -93,31 +93,31 @@ group :development, :test do
 end
 
 group :development do
-  gem 'letter_opener', '~> 1.6'
+  gem 'letter_opener'
   # Find back messages sent to letter_opener in a web interface
-  gem 'letter_opener_web', '~> 1.3'
+  gem 'letter_opener_web'
 
-  gem 'listen', '~> 3.1'
-  gem 'spring', '~> 2.0'
-  gem 'spring-watcher-listen', '~> 2.0'
+  gem 'listen'
+  gem 'spring'
+  gem 'spring-watcher-listen'
 
-  gem 'annotate', '~> 2.7'
-  gem 'awesome_print', '~> 1.8'
+  gem 'annotate'
+  gem 'awesome_print'
   # Possible to desactivate alerts if too annoying
-  gem 'bullet', '~> 5.7'
+  gem 'bullet'
   # Generate schéma of database automatically in erd.pdf
-  gem 'rails-erd', '~> 1.5'
+  gem 'rails-erd'
 
-  gem 'brakeman', '~> 4.2', require: false
-  gem 'overcommit', '~> 0.52'
+  gem 'brakeman', require: false
+  gem 'overcommit'
   gem 'ruby-graphviz'
   gem 'rubocop-rails', require: false
 
-  gem 'guard', '~> 2.14'
-  gem 'guard-bundler', '~> 2.1', require: false
-  gem 'guard-livereload', '~> 2.5', require: false
-  gem 'rack-livereload', '~> 0.3'
+  gem 'guard'
+  gem 'guard-bundler', require: false
+  gem 'guard-livereload', require: false
+  gem 'rack-livereload'
 
-  gem 'better_errors', '~> 2.4'
-  gem 'binding_of_caller', '~> 0.8'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
