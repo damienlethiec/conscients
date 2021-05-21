@@ -50,6 +50,6 @@ class Address < ApplicationRecord
   end
 
   def email
-    super || client.email
+    super || client&.email
   end
 end

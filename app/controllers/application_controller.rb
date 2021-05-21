@@ -60,7 +60,9 @@ class ApplicationController < ActionController::Base
   end
 
   def track_action
-    ahoy.track 'Action', request.path_parameters
+    ahoy.track('Action',
+      request.path_parameters.each{ |k,v| v.dup.gsub!('\\u0000', '') }
+    )
   end
 
   def configure_permitted_parameters
